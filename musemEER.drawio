@@ -520,6 +520,9 @@
                         <mxPoint x="-10" y="-10" as="offset"/>
                     </mxGeometry>
                 </mxCell>
+                <mxCell id="138" value="Art_type" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="350" y="230" width="60" height="20" as="geometry"/>
+                </mxCell>
             </root>
         </mxGraphModel>
     </diagram>
