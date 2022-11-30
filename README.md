@@ -12,13 +12,14 @@ Akshpreet Singh, 30129354, akshpreet.singh@ucalgary.ca
 
 ## Task Distribution
 
-### Aryan:### Designing the EER diagram along with a short description of the design and any assumptions made. Also mapping the EER Diagram into a relational schema.
+### Aryan
+Designing the EER diagram along with a short description of the design and any assumptions made. Also mapping the EER Diagram into a relational schema.
 
-### Aditya:###
+### Aditya
 
-### Rohil:###
+### Rohil:
 
-### Akshpreet:###
+### Akshpreet:
 
 ## To Do list:
 - modify this file to include your group members information and tasks assigned per each
