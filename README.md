@@ -6,7 +6,7 @@ Aryan Karadia, 30140288, aryan.karadia@ucalgary.ca
 
 Aditya Prasad, 30148859, aditya.prasad@ucalgary.ca 
 
-Rohil Singh Dhillon, 30139470, rohil.dhilon@ucalgary.ca 
+Rohil Singh Dhillon, 30139470, rohil.dhillon@ucalgary.ca 
 
 Akshpreet Singh, 30129354, akshpreet.singh@ucalgary.ca 
 
