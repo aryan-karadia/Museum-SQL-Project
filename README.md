@@ -18,6 +18,11 @@ Designing the EER diagram along with a short description of the design and any a
 ### Aditya
 
 ### Rohil:
+Queries: 
+1.) Show all tables and explain how they are related to one another 
+2.) A retrival query using joined tables
+3.) An update operation with any necessary triggers
+4.) A deletion operation with any necessary triggers
 
 ### Akshpreet:
 
