@@ -24,6 +24,8 @@ Queries:
 3.) An update operation with any necessary triggers
 4.) A deletion operation with any necessary triggers
 
+Data Collection on Paintings, Sculptures, Statues, and Others. 5 each for each category
+
 ### Akshpreet:
 
 ## To Do list:
