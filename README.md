@@ -28,6 +28,11 @@ Data Collection on Paintings, Sculptures, Statues, and Others. 5 each for each c
 
 ### Akshpreet:
 Creating the SQL script of the database from the relational schema. 
+Queries:
+5) A retrieval query using joined tables
+6) An update operation with any necessary triggers
+7) A deletion operation with any necessary triggers
+
 ## To Do list:
 - modify this file to include your group members information and tasks assigned per each
 - modify this file to include any notes on how to use and run the program
