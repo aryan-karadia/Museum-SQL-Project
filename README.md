@@ -20,6 +20,7 @@ Designing the EER diagram along with a short description of the design and any a
 ### Rohil:
 
 ### Akshpreet:
+Creating the SQL script of the database from the relational schema. 
 
 ## To Do list:
 - modify this file to include your group members information and tasks assigned per each
