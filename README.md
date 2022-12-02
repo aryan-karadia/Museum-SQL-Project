@@ -6,7 +6,7 @@ Aryan Karadia, 30140288, aryan.karadia@ucalgary.ca
 
 Aditya Prasad, 30148859, aditya.prasad@ucalgary.ca 
 
-Rohil Singh Dhillon, 30139470, rohil.dhilon@ucalgary.ca 
+Rohil Singh Dhillon, 30139470, rohil.dhillon@ucalgary.ca 
 
 Akshpreet Singh, 30129354, akshpreet.singh@ucalgary.ca 
 
@@ -24,7 +24,7 @@ Queries:
 3.) An update operation with any necessary triggers
 4.) A deletion operation with any necessary triggers
 
-Data Collection on Paintings, Sculptures, Statues, and Others. 5 each for each category
+Data Collection on Paintings, Sculptures, Statues, and Others. 5 each for each category.
 
 ### Akshpreet:
 Creating the SQL script of the database from the relational schema. 
