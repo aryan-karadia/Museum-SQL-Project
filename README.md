@@ -16,6 +16,7 @@ Akshpreet Singh, 30129354, akshpreet.singh@ucalgary.ca
 Designing the EER diagram along with a short description of the design and any assumptions made. Also mapping the EER Diagram into a relational schema.
 
 ### Aditya
+Creating and implementing the python application part of the project.  
 
 ### Rohil:
 Queries: 
