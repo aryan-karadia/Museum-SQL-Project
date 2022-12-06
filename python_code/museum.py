@@ -198,7 +198,7 @@ if __name__ == "__main__":
     if selection == '1':
         admin_consol(cur, cnx)
     elif selection == '2':
-        data_entry()
+        data_entry_consol(cur, cnx)
     else:
         guest_view()
     
