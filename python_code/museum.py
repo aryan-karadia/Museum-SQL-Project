@@ -1,6 +1,6 @@
 import mysql.connector
 
-def admin_consol(cur):
+def admin_consol(cur, cnx):
     print("\nWelcome to the Admin Consol:")
     print("1 - Add New User")
     print("2 - Edit User")
@@ -10,43 +10,56 @@ def admin_consol(cur):
     selection = input("please select 1, 2, 3, or 4: ")
 
     if selection == '1':
-        add_user(cur)
-
+        add_user(cur, cnx)
 
 
     pass
 
-def add_user(cur):
+def add_user(cur, cnx):
     print("\nWelcome to the Add User Consol:")
     print("1 - Add New Admin")
-    print("2 - Add New Data Entry")
+    print("2 - Add New Data Entry User")
     sub_selection = input("please select 1 or 2: ")
 
     if sub_selection == '1':
-        add_admin(cur)
+        add_admin(cur, cnx)
 
     pass
 
-def add_admin(cur):
-    print("Welcome to the Add Admin Consol:")
+def add_admin(cur, cnx):
+    print("\nWelcome to the Add Admin Consol:")
     print("Please enter the following information:")
-    username = input("User Name: ")
-    password = input("Password: ")
-    cur.execute('DROP USER IF EXISTS %s@localhost', (username,))
-    cur.execute('CREATE USER %s@localhost IDENTIFIED WITH mysql_native_password BY %s', (username, password))
-    cur.execute('GRANT ALL PRIVILEGES ON museum.* TO %s@localhost', (username,))
-    cur.execute('FLUSH PRIVILEGES')
-    cur.commit()
-    print("Admin added successfully!")
+    username = input("User Name: ") or None
+    password = input("Password: ") or None
+
+    sqlDropUser = "DROP USER IF EXISTS '%s'@'localhost'"
+    sqlCreateUser = "CREATE USER '%s'@'localhost IDENTIFIED WITH mysql_native_password BY '%s'"
+    sqlGrantUser = "GRANT db_admin@localhost TO '%s'@'localhost'"
+    sqlDefaultUser = "SET DEFAULT ROLE ALL TO '%s'@'localhost'" 
+
+    cur.execute(sqlDropUser, (username,), multi=True)
+    cur.execute(sqlCreateUser, (username, password,), multi=True)
+    cur.execute(sqlGrantUser, (username,), multi=True)
+    cur.execute(sqlDefaultUser, (username,), multi=True)
+    cnx.commit()
+    print("\nAdmin added successfully!\n")
+    admin_consol(cur, cnx)
     pass
 
+def add_data_entry(cur, cnx):
+    print("\nWelcome to the Add Data Entry Consol:")
+    print("Please enter the following information:")
+    username = input("User Name: ") or None
+    password = input("Password: ") or None
+
+    #sqlDropUser = "
 
 def data_entry():
     pass
 
 def guest_view():
-    print("Waht are you looking for:")
-    print("1- Event information")
+    print("What Information are you looking for: ")
+    print("1- ")
     print("2- Participant information")
     print("3- Country information")
     selection = input()
@@ -63,11 +76,11 @@ def athlete_info(cur):
     join=""
     att_selection = input("Do you want to see the Athlete name ? Y or N: ")
     if att_selection == 'Y':
-        join = 'from athlete naturaljoin PARTICIPANT'
+        join = 'from museum naturaljoin PARTICIPANT'
     
 
     #instr="select * from athlete where olympicid = %(oid)s"
-    instr="select * from athlete"
+    instr="select * from museum"
     searchkey=input("please insert the olympicid of the athlete you are looking for (press Enter to view all):") or None
 
     #cur.execute(instr,{'oid':searchkey})
@@ -102,8 +115,8 @@ if __name__ == "__main__":
     selection = input("please type 1, 2, or 3 to select your role:")
 
     if selection in ['1','2']:
-        username= input("user name:")
-        passcode= input("password:")
+        username= input("User name: ")
+        passcode= input("Password: ")
 
     else:
         username="guest"
@@ -115,14 +128,14 @@ if __name__ == "__main__":
         user=username,
         password= passcode)  
 
-        # Get a cursor
+    # Get a cursor
     cur = cnx.cursor()
-        # Execute a query
+    # Execute a query
     cur.execute("use museum")
 
 
     if selection == '1':
-        admin_consol(cur)
+        admin_consol(cur, cnx)
     elif selection == '2':
         data_entry()
     else:
