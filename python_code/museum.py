@@ -6,12 +6,12 @@ def format(cur, cnx):
     print("Search found ", len(search_result), " Entries:\n")
     header_size = len(col_names)
     for i in range(header_size):
-        print("{:<45s}".format(col_names[i]), end='')
+        print("{:<35s}".format(col_names[i]), end='')
     print()
     print(30 * header_size * '-')
     for i in range(len(search_result)):
         for x in range(len(search_result[i])):
-            print("{:<45s}".format(str(search_result[i][x])), end='')
+            print("{:<35s}".format(str(search_result[i][x])), end='')
         print()
 
 def admin_consol(cur, cnx):
@@ -106,7 +106,7 @@ def data_view(cur, cnx, usr):
     print()
     while (command != 'q'):
         cur.execute(command)
-        format(cur)
+        format(cur, cnx)
         command = input("Please enter the command you want to execute, enter q to quit: ")
     if usr == 'admin':
         admin_consol(cur, cnx)
