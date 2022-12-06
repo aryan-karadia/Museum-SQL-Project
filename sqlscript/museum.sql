@@ -108,5 +108,31 @@ CREATE TABLE ON_DISPLAY ( id_no double,
                        );
 
 INSERT INTO ART_OBJECT (id_no, origin, title, epoch, description, year)
-VALUES (100001, 'origin', 'title', 'epoch', 'desc', 2022);
-VALUES 
+VALUES (1, 'Italian', 'Mona Lisa', 'Renaissance', 'Portrait of a Florentine Merchants wife', 1503)
+VALUES (2, 'Italian', 'The Last Supper', 'Renaissance', 'Jesus and his followers eating a meal', 1496)
+VALUES (3, 'French', 'The Starry Night', 'Modern', 'Depicts a dreamy interpretation', 1889)
+VALUES (4, 'Norweigan', 'The Scream', 'Modern', 'It depicts a paniced creature', 1893)
+VALUES (5, 'Indian', 'Horses', 'Modern', 'Four horses are shown in tumultous gallop', 1960)
+
+
+INSERT INTO ARTIST (id_no, Name, description, Date_born, Date_died, Country_of_origin, Epoch, Main_style)
+
+INSERT INTO PAINTING (id_no, paint_type, drawn_on, Style)
+
+INSERT INTO SCULPTURE (id_no, Material, Height, Weight, Style)
+
+INSERT INTO STATUE (id_no, Material, Height, Weight, Style)
+
+INSERT INTO OTHER (id_no, Type, Style)
+
+INSERT INTO COLLECTIONS (Name, Phone, Contact_person, Street_address, City, Country, Postal_code, Type, Description)
+
+INSERT INTO PERMANENT_COLLECTION (id_no, Status, Cost, Date_acquired)
+
+INSERT INTO BORROWED (id_no, Collection_origin, Date_borrowed, Date_returned)
+
+INSERT INTO EXHIBITIONS (Name, Start_date, End_date)
+
+INSERT INTO IN_COLLECTION (id_no, Name)
+
+INSERT INTO ON_DISPLAY (id_no, Name)
