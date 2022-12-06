@@ -1,21 +1,68 @@
 import mysql.connector
 
+def format(cur, cnx):
+    col_names = cur.column_names
+    search_result = cur.fetchall()
+    print("Search found ", len(search_result), " Entries:\n")
+    header_size = len(col_names)
+    for i in range(header_size):
+        print("{:<45s}".format(col_names[i]), end='')
+    print()
+    print(30 * header_size * '-')
+    for i in range(len(search_result)):
+        for x in range(len(search_result[i])):
+            print("{:<45s}".format(str(search_result[i][x])), end='')
+        print()
+
 def admin_consol(cur):
     print("\nWelcome to the Admin Consol:")
     print("1 - Add New User")
     print("2 - Edit User")
     print("3 - Block User")
     print("4 - Change Database") #data_entry, put into data entry; reduce redundancy
+    print("5 - Exit")
 
-    selection = input("please select 1, 2, 3, or 4: ")
+    selection = input("please select 1, 2, 3, 4, 5: ")
 
     if selection == '1':
         add_user(cur)
+    if selection == '4':
+        print("\nWelcome to the Database Consol:")
+        print("1 - Edit database through command line")
+        print("2 - Edit database using a source file")
+        sub_selection = input("please select 1 or 2: ")
 
+        if sub_selection == '1':
+            print("\nWould you like to manipulate the database or view the database?")
+            print("1 - Manipulate")
+            print("2 - View")
+            sub_select = input("please select 1 or 2: ")
+            if sub_select == '1':
+                data_manipulate(cur, cnx, 'admin')
+            if sub_select == '2':
+                data_view(cur, cnx, 'admin')
+        if sub_selection == '2':
+            filename = input("Please enter the name of the file you want to use: ")
+            with open(filename, 'r') as f:
+                for line in f:
+                    cur.execute(line)
+                cur.commit()
+                print("Database updated successfully!")
+    if selection == '5':
+        exit()
 
-
-    pass
-
+def data_manipulate(cur, cnx, usr):
+    command = input("Please enter the command you want to execute, enter q to quit: ")
+    while (command != 'q'):
+        cur.execute(command)
+        cnx.commit()
+        print("\nCommand executed successfully!\n")
+        command = input("Please enter the command you want to execute, enter q to quit: ")
+    if usr == 'admin':
+        admin_consol(cur, cnx)
+    if usr == 'data_entry':
+        data_entry_consol(cur, cnx)
+    
 def add_user(cur):
     print("\nWelcome to the Add User Consol:")
     print("1 - Add New Admin")
@@ -41,11 +88,23 @@ def add_admin(cur):
     pass
 
 
-def data_entry():
+def data_view(cur, cnx, usr):
+    command = input("Please enter the command you want to execute, enter q to quit: ")
+    print()
+    while (command != 'q'):
+        cur.execute(command)
+        format(cur)
+        command = input("Please enter the command you want to execute, enter q to quit: ")
+    if usr == 'admin':
+        admin_consol(cur, cnx)
+    if usr == 'data_entry':
+        data_entry_consol(cur, cnx)
+
+def data_entry_consol(cur, cnx):
     pass
 
 def guest_view():
-    print("Waht are you looking for:")
+    print("What are you looking for:")
     print("1- Event information")
     print("2- Participant information")
     print("3- Country information")
