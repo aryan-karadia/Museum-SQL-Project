@@ -137,3 +137,4 @@ SET DEFAULT ROLE ALL TO administrator@localhost;
 SET DEFAULT ROLE ALL TO employee@localhost;
 SET DEFAULT ROLE ALL TO guest@localhost;
 
+SELECT * FROM information_schema.USER_PRIVILEGES;
