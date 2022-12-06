@@ -108,6 +108,11 @@ CREATE TABLE ON_DISPLAY ( id_no double,
                        );
 
 INSERT INTO ART_OBJECT (id_no, Origin, Title, Epoch, Description, Year)
+VALUES (1, 'Italian', 'Mona Lisa', 'Renaissance', 'Portrait of a Florentine Merchants wife', 1503)
+VALUES (2, 'Italian', 'The Last Supper', 'Renaissance', 'Jesus and his followers eating a meal', 1496)
+VALUES (3, 'French', 'The Starry Night', 'Modern', 'Depicts a dreamy interpretation', 1889)
+VALUES (4, 'Norweigan', 'The Scream', 'Modern', 'It depicts a paniced creature', 1893)
+VALUES (5, 'Indian', 'Horses', 'Modern', 'Four horses are shown in tumultous gallop', 1960)
 
 INSERT INTO ARTIST (id_no, Name, Description, Date_born, Date_died, Country_of_origin, Epoch, Main_style)
 
