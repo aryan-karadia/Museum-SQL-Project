@@ -12,10 +12,6 @@ CREATE TABLE ART_OBJECT( id_no double,
                          PRIMARY KEY (id_no)
                          );
 
-INSERT INTO ART_OBJECT (id_no, origin, title, epoch, description, year)
-VALUES
-(100001, 'origin', 'title', 'epoch', 'desc', 2022);
-
 DROP TABLE IF EXISTS ARTIST;                         
 CREATE TABLE ARTIST  ( id_no double,
 					   Name char(50),
@@ -110,3 +106,7 @@ CREATE TABLE ON_DISPLAY ( id_no double,
                        FOREIGN KEY (id_no) REFERENCES ART_OBJECT(id_no),
                        FOREIGN KEY (Name) REFERENCES EXHIBITIONS(Name)
                        );
+
+INSERT INTO ART_OBJECT (id_no, origin, title, epoch, description, year)
+VALUES (100001, 'origin', 'title', 'epoch', 'desc', 2022);
+VALUES 
