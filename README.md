@@ -6,7 +6,7 @@ Aryan Karadia, 30140288, aryan.karadia@ucalgary.ca
 
 Aditya Prasad, 30148859, aditya.prasad@ucalgary.ca 
 
-Rohil Singh Dhillon, 30139470, rohil.dhilon@ucalgary.ca 
+Rohil Singh Dhillon, 30139470, rohil.dhillon@ucalgary.ca 
 
 Akshpreet Singh, 30129354, akshpreet.singh@ucalgary.ca 
 
@@ -16,8 +16,16 @@ Akshpreet Singh, 30129354, akshpreet.singh@ucalgary.ca
 Designing the EER diagram along with a short description of the design and any assumptions made. Also mapping the EER Diagram into a relational schema.
 
 ### Aditya
+Creating and implementing the python application part of the project.  
 
 ### Rohil:
+Queries: 
+1.) Show all tables and explain how they are related to one another 
+2.) A retrival query using joined tables
+3.) An update operation with any necessary triggers
+4.) A deletion operation with any necessary triggers
+
+Data Collection on Paintings, Sculptures, Statues, and Others. 5 each for each category. Data collection on artists, exhibitions, and collections.
 
 ### Akshpreet:
 Creating the SQL script of the database from the relational schema. 
