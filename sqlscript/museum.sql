@@ -110,3 +110,30 @@ CREATE TABLE ON_DISPLAY ( id_no double,
                        FOREIGN KEY (id_no) REFERENCES ART_OBJECT(id_no),
                        FOREIGN KEY (Name) REFERENCES EXHIBITIONS(Name)
                        );
+
+
+DROP ROLE IF EXISTS db_admin@localhost, read_access@localhost, db_entry@localhost;
+
+CREATE ROLE db_admin@localhost, read_access@localhost, db_entry@localhost;
+
+GRANT ALL PRIVILEGES ON MUSEUM.* TO db_admin@localhost;
+GRANT INSERT, UPDATE, DELETE ON MUSEUM.* TO db_entry@localhost;
+GRANT SELECT ON MUSEUM.* TO read_access@localhost;
+
+DROP USER IF EXISTS administrator@localhost;
+DROP USER IF EXISTS guest@localhost;
+DROP USER IF EXISTS employee@localhost;
+
+CREATE USER administrator@localhost IDENTIFIED WITH mysql_native_password BY 'password';
+CREATE USER employee@localhost IDENTIFIED WITH mysql_native_password BY '12345';
+CREATE USER guest@localhost;
+
+
+GRANT db_admin@localhost TO administrator@localhost;
+GRANT db_entry@localhost TO employee@localhost;
+GRANT read_access@localhost TO guest@localhost;
+
+SET DEFAULT ROLE ALL TO administrator@localhost;
+SET DEFAULT ROLE ALL TO employee@localhost;
+SET DEFAULT ROLE ALL TO guest@localhost;
+
