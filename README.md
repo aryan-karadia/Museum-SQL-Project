@@ -16,6 +16,7 @@ Akshpreet Singh, 30129354, akshpreet.singh@ucalgary.ca
 Designing the EER diagram along with a short description of the design and any assumptions made. Also mapping the EER Diagram into a relational schema.
 
 ### Aditya
+Creating and implementing the python application part of the project.  
 
 ### Rohil:
 Queries: 
@@ -24,14 +25,9 @@ Queries:
 3.) An update operation with any necessary triggers
 4.) A deletion operation with any necessary triggers
 
-Data Collection on Paintings, Sculptures, Statues, and Others. 5 each for each category.
+Data Collection on Paintings, Sculptures, Statues, and Others. 5 each for each category. Data collection on artists, exhibitions, and collections.
 
 ### Akshpreet:
-Creating the SQL script of the database from the relational schema. 
-Queries:
-5) A retrieval query using joined tables
-6) An update operation with any necessary triggers
-7) A deletion operation with any necessary triggers
 
 ## To Do list:
 - modify this file to include your group members information and tasks assigned per each
