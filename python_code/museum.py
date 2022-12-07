@@ -41,18 +41,7 @@ def admin_consol(cur, cnx):
             if sub_select == '2':
                 data_view(cur, cnx)
         if sub_selection == '2':
-            filename = input("Please enter the name of the file you want to use: ")
-            fd = open(filename, 'r')
-            sqlFile = fd.read()
-            fd.close()
-            sqlCommands = sqlFile.split(';')
-            for command in sqlCommands:
-                try:
-                    if command.strip() != '':
-                        cur.execute(command)
-                except IOError as msg:
-                    print("Command skipped: ", msg)
-            print("Database updated successfully!")
+            add_art_object_from_file(cur, cnx)
     if selection == '5':
         exit()
     else:
@@ -182,6 +171,51 @@ def lookup(cur, cnx):
     else:
         print("Invalid selection, please try again")
         lookup(cur, cnx)
+
+def add(cur, cnx):
+    print("\nWelcome to the Add Consol:")
+    print("1 - Add Art Object")
+    print("2 - Add Artist")
+    print("3 - Add Collection")
+    print("4 - Add piece into collection")
+    print("5 - Add Exhibition")
+    print("6 - Add On Display")
+    print("7 - Go Back")
+
+    selection = input("please select 1, 2, 3, 4, 5, 6, 7: ")
+
+    if selection == '1':
+        from_file = input("Would you like to add the art object from a file? (y/n): ")
+        if from_file == 'y':
+            add_art_object_from_file(cur, cnx)
+        category = input(print("\nWhich category of art object would you like to add?\n Please make sure to enter the correctly spelled category name: "))
+        location = input(print("Please enter if the art object is borrowed or part of the permanent collection: "))
+        values = input(print("Please enter the values for the art object in the following format: \n (id_no, origin, title, epoch, description, year) \n Please make sure to enter the values in the correct order seperated by commas: "))
+
+        art_object_sqlcommand = "INSERT INTO art_object (id_no, origin, title, epoch, description, year) VALUES (%s)"
+        cur.execute(art_object_sqlcommand, (values))
+        cnx.commit()
+
+        if category == 'painting':
+            painting_sqlcommand = "INSERT INTO painting (id_no, paint_type, drawn_on, style) VALUES (%s)"
+            cur.execute(painting_sqlcommand, (values, location))
+            cnx.commit()
+        
+
+def add_art_object_from_file(cur, cnx):
+    filename = input("Please enter the name of the file you would like to add: ")
+    fd = open(filename, 'r')
+    sqlFile = fd.read()
+    fd.close()
+    sqlCommands = sqlFile.split(';')
+    for command in sqlCommands:
+        try:
+            if command.strip() != '':
+                cur.execute(command)
+        except IOError as msg:
+            print("Command skipped: ", msg)
+    print("Database updated successfully!")
+    
     
 def specific_lookup(cur, cnx, lookup, identifier):
     sql = "SELECT * FROM %s WHERE id_no = %s"
