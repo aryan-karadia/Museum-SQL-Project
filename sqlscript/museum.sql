@@ -25,6 +25,7 @@ CREATE TABLE ARTIST  ( id_no double,
                        Country_of_origin char(50),
                        Epoch char(50),
                        Main_style char(50),
+					   PRIMARY KEY (Name),
 					   FOREIGN KEY (id_no) REFERENCES ART_OBJECT (id_no)
 					   );
                        
