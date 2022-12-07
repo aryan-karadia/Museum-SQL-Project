@@ -246,6 +246,11 @@ def add(cur, cnx):
         values = input(print("Please enter the values for an exhibition in the following format:(name, start_date, end_date) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
         exhibition_sqlcommand = "INSERT INTO exhibitions (name, start_date, end_date) VALUES (%s)"
         cur.execute(exhibition_sqlcommand, (values))
+    
+    if selection == '6':
+        values = input(print("Please enter the values for a piece being on_display or not in the following format:(id_no, name) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
+        exhibition_sqlcommand = "INSERT INTO on_display (id_no, name) VALUES (%s)"
+        cur.execute(exhibition_sqlcommand, (values))
         
     cnx.commit()
     print("Database updated successfully!")
