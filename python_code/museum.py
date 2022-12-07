@@ -189,18 +189,43 @@ def add(cur, cnx):
         if from_file == 'y':
             add_art_object_from_file(cur, cnx)
         category = input(print("\nWhich category of art object would you like to add?\n Please make sure to enter the correctly spelled category name: "))
-        location = input(print("Please enter if the art object is borrowed or part of the permanent collection: "))
-        values = input(print("Please enter the values for the art object in the following format: \n (id_no, origin, title, epoch, description, year) \n Please make sure to enter the values in the correct order seperated by commas: "))
+        location = input(print("Please enter if the art object is borrowed or part of the permanent_collection: "))
+        values = input(print("Please enter the values for the art object in the following format: \n (id_no, origin, title, epoch, description, year) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
 
         art_object_sqlcommand = "INSERT INTO art_object (id_no, origin, title, epoch, description, year) VALUES (%s)"
         cur.execute(art_object_sqlcommand, (values))
         cnx.commit()
 
         if category == 'painting':
+            values = input(print("Please enter the values for the painting in the following format: \n (id_no, paint_type, drawn_on, style) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
             painting_sqlcommand = "INSERT INTO painting (id_no, paint_type, drawn_on, style) VALUES (%s)"
-            cur.execute(painting_sqlcommand, (values, location))
+            cur.execute(painting_sqlcommand, (values))
             cnx.commit()
-        
+        if category == 'sculpture':
+            values = input(print("Please enter the values for the sculpture in the following format: \n (id_no, material, height, weight, style) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
+            sculpture_sqlcommand = "INSERT INTO sculpture (id_no, material, height, weight, style) VALUES (%s)"
+            cur.execute(sculpture_sqlcommand, (values))
+            cnx.commit()
+        if category == 'statue':
+            values = input(print("Please enter the values for the statue in the following format: \n (id_no, material, height, weight, style) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
+            statue_sqlcommand = "INSERT INTO statue (id_no, material, height, weight, style) VALUES (%s)"
+            cur.execute(statue_sqlcommand, (values))
+            cnx.commit()
+        if category == 'other':
+            values = input(print("Please enter the values for the other in the following format: \n (id_no, type, style) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
+            other_sqlcommand = "INSERT INTO other (id_no, material, type, style) VALUES (%s)"
+            cur.execute(other_sqlcommand, (values))
+            cnx.commit()
+        if location == 'borrowed':
+            values = input(print("Please enter the values for the borrowed art object in the following format: \n (id_no, collection_origin, date_borrowed, date_returned) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
+            borrowed_sqlcommand = "INSERT INTO borrowed (id_no, collection_origin, date_borrowed, date_returned) VALUES (%s)"
+            cur.execute(borrowed_sqlcommand, (values))
+            cnx.commit()
+        if location == 'permanent_collection':
+            values = input(print("Please enter the values for the permanent_collection art object in the following format: \n (id_no, status, cost, date_acquired) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
+            permanent_collection_sqlcommand = "INSERT INTO permanent_collection (id_no, status, cost, date_acquired) VALUES (%s)"
+            cur.execute(permanent_collection_sqlcommand, (values))
+            cnx.commit()
 
 def add_art_object_from_file(cur, cnx):
     filename = input("Please enter the name of the file you would like to add: ")
