@@ -229,7 +229,17 @@ def add(cur, cnx):
         cur.execute(artist_sqlcommand, (values))
         cnx.commit()
         print("Database updated successfully!")
+    
+    if selection == '3':
+        values = input(print("Please enter the values for the collection in the following format:(name, phone, contact_person, street_address, city, country, postal_code, type, description) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
+        collection_sqlcommand = "INSERT INTO collection (name, phone, contact_person, street_address, city, country, postal_code, type, description) VALUES (%s)"
+        cur.execute(collection_sqlcommand, (values))
+        cnx.commit()
+        print("Database updated successfully!")
+    
+    if selection == '4':
         
+
 
 def add_art_object_from_file(cur, cnx):
     filename = input("Please enter the name of the file you would like to add: ")
