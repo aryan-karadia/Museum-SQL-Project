@@ -107,6 +107,8 @@ CREATE TABLE ON_DISPLAY ( id_no double,
                        FOREIGN KEY (Name) REFERENCES EXHIBITIONS(Name)
                        );
 
+USE MUSEUM;
+
 INSERT INTO ART_OBJECT (id_no, Origin, Title, Epoch, Description, Year)
  VALUES (1, 'Italian', 'Mona Lisa', 'Renaissance', 'Portrait of a Florentine Merchants wife', 1503)
 		(2, 'Italian', 'The Last Supper', 'Renaissance', 'Jesus and his followers eating a meal', 1496)
@@ -127,7 +129,7 @@ INSERT INTO ART_OBJECT (id_no, Origin, Title, Epoch, Description, Year)
 		(17, 'American', 'Lunch atop a skyscraper', 'Modern', 'Workers eating lunch on a singular beam',1932)
 		(18, 'American','V-J Day in Times Square', 'Modern', 'uniformed man kissing a woman', 1945)
 		(19, 'Vietnamese','The Burning Monk', 'Modern','Protesting buddhist monk ablaze',1963)
-		(20, 'Vietnamese', 'Napalm Girl', 'Modern', 'An unclothed girl sobbing',1972)
+		(20, 'Vietnamese', 'Napalm Girl', 'Modern', 'An unclothed girl sobbing',1972);
 
 INSERT INTO ARTIST (id_no, Name, Description, Date_born, Date_died, Country_of_origin, Epoch, Main_style)
  VALUES (1, 'Leonardo Da Vinci', 'Mona Lisa',1452,1519,Italy,'Renaissance','Renaissance')
@@ -149,7 +151,7 @@ INSERT INTO ARTIST (id_no, Name, Description, Date_born, Date_died, Country_of_o
 		(17, 'Charles Clyde Ebbets', 'Lunch atop a skyscraper',1905,1978, 'American', 'Modern','Modern')
 		(18, 'Alfred Eisenstaedt', 'V-J Day in Times Square', 1898, 1995, 'Polish', 'Modern', 'Modern')
 		(19, 'Malcome Brown', 'The Burning Monk', 1931, 2012, 'American', 'Modern', 'Modern')
-		(20, 'Nick Ut', 'Napalm Girl', 1951, ,'American', 'Modern', 'Modern')
+		(20, 'Nick Ut', 'Napalm Girl', 1951, ,'American', 'Modern', 'Modern');
 
 
 INSERT INTO PAINTING (id_no, paint_type, drawn_on, Style)
@@ -157,28 +159,28 @@ INSERT INTO PAINTING (id_no, paint_type, drawn_on, Style)
 		(2, 'Mural', 1496, 'Renaissance')
 		(3, 'Landscape', 1889, 'Modern')
 		(4, 'Abstract', 1893, 'Modern')
-		(5, 'Animal', 1960, 'Modern')
+		(5, 'Animal', 1960, 'Modern');
 
 INSERT INTO SCULPTURE (id_no, Material, Height, Weight, Style)
  VALUES (6, 'Concrete/Soapstone', 30, 635)
 		(7, 'Copper/Steel', 93, 204)
 		(8, 'Concrete/Metal', 85, 8000)
 		(9, 'Copper', 128, 1000)
-		(10, 'Concrete/Bronze', 182, 67000)
+		(10, 'Concrete/Bronze', 182, 67000);
 
 INSERT INTO STATUE (id_no, Material, Height, Weight, Style)
  VALUES (11, 'Marble', 5.17, 6, 'Renaissance')
 		(12, 'Marble', 3.5, 4.2, 'Renaissance')
 		(13, 'Marble', 1.89, 5.4, 'Renaissance')
 		(14, 'Marble', 10, 1, 'Renaissance')
-		(15, 'Marble', 1.74, 6.1, 'Renaissance')
+		(15, 'Marble', 1.74, 6.1, 'Renaissance');
 
 INSERT INTO OTHER (id_no, Type, Style)
  VALUES (16, 'Photo', 'Humanist')
 		(17, 'Photo', 'Humanist')
 		(18, 'Photo', 'Humanist')
 		(19, 'Photo', 'Photojournalism')
-		(20, 'Photo', 'Photojournalism')
+		(20, 'Photo', 'Photojournalism');
 
 INSERT INTO COLLECTIONS (Name, Phone, Contact_person, Street_address, City, Country, Postal_code, Type, Description)
  VALUES ('Louvre', 140205050, 'Jean Hollande', 'Musée du Louvre', 'Paris', 'France', 75001, 'Renaissance', 'Renaissance art')
@@ -186,7 +188,7 @@ INSERT INTO COLLECTIONS (Name, Phone, Contact_person, Street_address, City, Coun
 		('National Museum of Oslo', 21982000, 'Erik Magnusson', 'Brynjulf Bulls plass 3', 'Oslo', 'Norway', 250)
 		('Accademia Gallery', 0550987100, 'Antonio Basillieni', 'Via Ricasoli, 58/60', 'Firenze Fi', 'Italy', 50129)
 		('Musée Rodin', 144186110, 'Francois Dubois', '77 Rue de Varenne', 'Paris', 'France', 75007)
-		('Brussels City Museum', 22794350, 'Michel Peeters', 'Grote Markt van', 'Brussels', 'Belgium', 1000)
+		('Brussels City Museum', 22794350, 'Michel Peeters', 'Grote Markt van', 'Brussels', 'Belgium', 1000);
 
 
 INSERT INTO PERMANENT_COLLECTION (id_no, Status, Cost, Date_acquired)
@@ -195,21 +197,21 @@ INSERT INTO PERMANENT_COLLECTION (id_no, Status, Cost, Date_acquired)
 		(4, 'On Display', 120000000, 1910)
 		(11, 'On Display', 200000000, 1910)
 		(13, 'In Collection', 16000000, 1922)
-		(14, 'stored', 5000000, 1966)
+		(14, 'stored', 5000000, 1966);
 
 
 INSERT INTO BORROWED (id_no, Collection_origin, Date_borrowed, Date_returned)
 VALUES	(11, 'Accademia Gallery', '11/05/2022', '12/06/2022')
-		(13, 'Musée Rodin', '11/05/2022', '12/06/2022')
+		(13, 'Musée Rodin', '11/05/2022', '12/06/2022');
 
 INSERT INTO EXHIBITIONS (Name, Start_date, End_date)
-	VALUES ('The Tudors', '03/12/2021', '03/02/2022')
+	VALUES ('The Tudors', '03/12/2021', '03/02/2022');
 
 INSERT INTO IN_COLLECTION (id_no, Name)
-	VALUES (13, 'The Thinker')
+	VALUES (13, 'The Thinker');
 
 INSERT INTO ON_DISPLAY (id_no, Name)
  VALUES (1, 'Mona Lisa')
 		(3, 'The Starry Night')
 		(4, 'The Scream')
-		(11, 'The Statue David')
+		(11, 'The Statue David');
