@@ -238,7 +238,18 @@ def add(cur, cnx):
         print("Database updated successfully!")
     
     if selection == '4':
+        values = input(print("Please enter the values for the piece entering a collection in the following format:(id_no, name) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
+        exhibition_sqlcommand = "INSERT INTO in_collection (id_no, name) VALUES (%s)"
+        cur.execute(exhibition_sqlcommand, (values))
+    
+    if selection == '5':
+        values = input(print("Please enter the values for an exhibition in the following format:(name, start_date, end_date) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
+        exhibition_sqlcommand = "INSERT INTO exhibitions (name, start_date, end_date) VALUES (%s)"
+        cur.execute(exhibition_sqlcommand, (values))
         
+    cnx.commit()
+    print("Database updated successfully!")
+
 
 
 def add_art_object_from_file(cur, cnx):
