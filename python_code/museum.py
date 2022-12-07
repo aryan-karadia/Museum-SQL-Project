@@ -6,94 +6,112 @@ def format(cur, cnx):
     print("Search found ", len(search_result), " Entries:\n")
     header_size = len(col_names)
     for i in range(header_size):
-        print("{:<45s}".format(col_names[i]), end='')
+        print("{:<35s}".format(col_names[i]), end='')
     print()
     print(30 * header_size * '-')
     for i in range(len(search_result)):
         for x in range(len(search_result[i])):
-            print("{:<45s}".format(str(search_result[i][x])), end='')
+            print("{:<35s}".format(str(search_result[i][x])), end='')
         print()
 
-def admin_consol(cur):
+def admin_consol(cur, cnx):
     print("\nWelcome to the Admin Consol:")
     print("1 - Add New User")
     print("2 - Edit User")
     print("3 - Block User")
-    print("4 - Change Database") #data_entry, put into data entry; reduce redundancy
+    print("4 - Change Database") 
     print("5 - Exit")
 
     selection = input("please select 1, 2, 3, 4, 5: ")
 
     if selection == '1':
-        add_user(cur)
+        add_user(cur, cnx)
     if selection == '4':
         print("\nWelcome to the Database Consol:")
         print("1 - Edit database through command line")
         print("2 - Edit database using a source file")
         sub_selection = input("please select 1 or 2: ")
-
         if sub_selection == '1':
             print("\nWould you like to manipulate the database or view the database?")
             print("1 - Manipulate")
             print("2 - View")
             sub_select = input("please select 1 or 2: ")
             if sub_select == '1':
-                data_manipulate(cur, cnx, 'admin')
+                data_manipulate(cur, cnx)
             if sub_select == '2':
-                data_view(cur, cnx, 'admin')
+                data_view(cur, cnx)
         if sub_selection == '2':
             filename = input("Please enter the name of the file you want to use: ")
-            with open(filename, 'r') as f:
-                for line in f:
-                    cur.execute(line)
-                cur.commit()
-                print("Database updated successfully!")
+            fd = open(filename, 'r')
+            sqlFile = fd.read()
+            fd.close()
+            sqlCommands = sqlFile.split(';')
+            for command in sqlCommands:
+                try:
+                    if command.strip() != '':
+                        cur.execute(command)
+                except IOError as msg:
+                    print("Command skipped: ", msg)
+            print("Database updated successfully!")
     if selection == '5':
         exit()
+    else:
+        print("Invalid selection, please try again")
+        admin_consol(cur, cnx)
 
-def data_manipulate(cur, cnx, usr):
+def data_manipulate(cur, cnx):
     command = input("Please enter the command you want to execute, enter q to quit: ")
     while (command != 'q'):
         cur.execute(command)
         cnx.commit()
         print("\nCommand executed successfully!\n")
         command = input("Please enter the command you want to execute, enter q to quit: ")
-    if usr == 'admin':
-        admin_consol(cur, cnx)
-    if usr == 'data_entry':
-        data_entry_consol(cur, cnx)
     
-def add_user(cur):
+def add_user(cur, cnx):
     print("\nWelcome to the Add User Consol:")
     print("1 - Add New Admin")
-    print("2 - Add New Data Entry")
+    print("2 - Add New Data Entry User")
     sub_selection = input("please select 1 or 2: ")
 
     if sub_selection == '1':
-        add_admin(cur)
+        add_admin(cur, cnx)
 
     pass
 
-def add_admin(cur):
-    print("Welcome to the Add Admin Consol:")
+def add_admin(cur, cnx):
+    print("\nWelcome to the Add Admin Consol:")
     print("Please enter the following information:")
-    username = input("User Name: ")
-    password = input("Password: ")
-    cur.execute('DROP USER IF EXISTS %s@localhost', (username,))
-    cur.execute('CREATE USER %s@localhost IDENTIFIED WITH mysql_native_password BY %s', (username, password))
-    cur.execute('GRANT ALL PRIVILEGES ON museum.* TO %s@localhost', (username,))
-    cur.execute('FLUSH PRIVILEGES')
-    cur.commit()
-    print("Admin added successfully!")
+    username = input("User Name: ") or None
+    password = input("Password: ") or None
+
+    sqlDropUser = "DROP USER IF EXISTS %s@localhost"
+    sqlCreateUser = "CREATE USER %s@localhost IDENTIFIED WITH mysql_native_password BY '%s'"
+    sqlGrantUser = "GRANT db_admin@localhost TO %s@localhost"
+    sqlDefaultUser = "SET DEFAULT ROLE ALL TO %s@localhost" 
+
+    cur.execute(sqlDropUser, (username,), multi=True)
+    cur.execute(sqlCreateUser, (username, password,), multi=True)
+    cur.execute(sqlGrantUser, (username,), multi=True)
+    cur.execute(sqlDefaultUser, (username,), multi=True)
+    cnx.commit()
+    print("\nAdmin added successfully!\n")
+    admin_consol(cur, cnx)
     pass
 
+def add_data_entry(cur, cnx):
+    print("\nWelcome to the Add Data Entry Consol:")
+    print("Please enter the following information:")
+    username = input("User Name: ") or None
+    password = input("Password: ") or None
+
+    #sqlDropUser = "
 
 def data_view(cur, cnx, usr):
     command = input("Please enter the command you want to execute, enter q to quit: ")
     print()
     while (command != 'q'):
         cur.execute(command)
-        format(cur)
+        format(cur, cnx)
         command = input("Please enter the command you want to execute, enter q to quit: ")
     if usr == 'admin':
         admin_consol(cur, cnx)
@@ -101,10 +119,78 @@ def data_view(cur, cnx, usr):
         data_entry_consol(cur, cnx)
 
 def data_entry_consol(cur, cnx):
-    pass
+    print("\nWelcome to the Data Entry Consol:")
+    print("1 - Lookup Information")
+    print("2 - Add Information")
+    print("3 - Edit Information")
+    print("4 - Quit Program")
+
+    selection = input("please select 1, 2, 3, 4: ")
+
+    if selection == '1':
+        lookup(cur, cnx)
+    if selection == '2':
+        add(cur, cnx)
+    if selection == '3':
+        edit(cur, cnx)
+    if selection == '4':
+        exit()
+    else:
+        print("Invalid selection, please try again")
+        data_entry_consol(cur, cnx)
+
+def lookup(cur, cnx):
+    print("\nWelcome to the lookup Consol:")
+    print("1 - Lookup Artist")
+    print("2 - Lookup Painting")
+    print("3 - Lookup Sculpture")
+    print("4 - Lookup Statue")
+    print("5 - Lookup Other")
+    print("6 - Lookup Collection")
+    print("7 - Lookup Exhibitions")
+    print("8 - Lookup On Display")
+    print("9 - Go Back")
+
+    selection = input("please select 1, 2, 3, 4, 5, 6, 7, 8: ")
+
+    if selection == '1':
+        artist_name = input("Please enter the name of the artist: ")
+        specific_lookup(cur, cnx, 'artist', artist_name)
+    if selection == '2':
+        painting_name = input("Please enter the id_no of the painting: ")
+        specific_lookup(cur, cnx, 'painting', painting_name)
+    if selection == '3':
+        sculpture_name = input("Please enter the id_no of the sculpture: ")
+        specific_lookup(cur, cnx, 'sculpture', sculpture_name)
+    if selection == '4':
+        statue_name = input("Please enter the id_no of the statue: ")
+        specific_lookup(cur, cnx, 'statue', statue_name)
+    if selection == '5':
+        other_name = input("Please enter the id_no of the other: ")
+        specific_lookup(cur, cnx, 'other', other_name)
+    if selection == '6':
+        collection_name = input("Please enter the Name of the collection: ")
+        specific_lookup(cur, cnx, 'collection', collection_name)
+    if selection == '7':
+        exhibition_name = input("Please enter the Name of the exhibition: ")
+        specific_lookup(cur, cnx, 'exhibition', exhibition_name)
+    if selection == '8':
+        on_display_name = input("Please enter the id_no of the art object to check if it is on display or not: ")
+        specific_lookup(cur, cnx, 'on_display', on_display_name)
+    if selection == '9':
+        data_entry_consol(cur, cnx)
+    else:
+        print("Invalid selection, please try again")
+        lookup(cur, cnx)
+    
+def specific_lookup(cur, cnx, lookup, identifier):
+    sql = "SELECT * FROM %s WHERE id_no = %s"
+    cur.execute(sql, (lookup, identifier,))
+    format(cur, cnx)
 
 def guest_view():
-    print("What are you looking for:")
+    print("What Information are you looking for: ")
+    print("1- ")
     print("1- Event information")
     print("2- Participant information")
     print("3- Country information")
@@ -122,11 +208,11 @@ def athlete_info(cur):
     join=""
     att_selection = input("Do you want to see the Athlete name ? Y or N: ")
     if att_selection == 'Y':
-        join = 'from athlete naturaljoin PARTICIPANT'
+        join = 'from museum naturaljoin PARTICIPANT'
     
 
     #instr="select * from athlete where olympicid = %(oid)s"
-    instr="select * from athlete"
+    instr="select * from museum"
     searchkey=input("please insert the olympicid of the athlete you are looking for (press Enter to view all):") or None
 
     #cur.execute(instr,{'oid':searchkey})
@@ -161,8 +247,8 @@ if __name__ == "__main__":
     selection = input("please type 1, 2, or 3 to select your role:")
 
     if selection in ['1','2']:
-        username= input("user name:")
-        passcode= input("password:")
+        username= input("User name: ")
+        passcode= input("Password: ")
 
     else:
         username="guest"
@@ -174,16 +260,16 @@ if __name__ == "__main__":
         user=username,
         password= passcode)  
 
-        # Get a cursor
+    # Get a cursor
     cur = cnx.cursor()
-        # Execute a query
+    # Execute a query
     cur.execute("use museum")
 
 
     if selection == '1':
-        admin_consol(cur)
+        admin_consol(cur, cnx)
     elif selection == '2':
-        data_entry()
+        data_entry_consol(cur, cnx)
     else:
         guest_view()
     

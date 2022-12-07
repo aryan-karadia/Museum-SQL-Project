@@ -2,16 +2,17 @@
     "sqltools.connections": [
         {
             "mysqlOptions": {
-                "authProtocol": "default"
+                "authProtocol": "xprotocol"
             },
             "previewLimit": 50,
             "server": "localhost",
-            "port": 3306,
+            "port": 33060,
             "driver": "MySQL",
-            "name": "museum",
+            "name": "musem",
             "database": "museum",
-            "username": "root",
-            "password": "Soccer1624?"
+            "username": "administrator",
+            "connectionTimeout": 1000,
+            "password": "password"
         }
     ]
 }
