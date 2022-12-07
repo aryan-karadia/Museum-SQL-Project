@@ -112,29 +112,41 @@ CREATE TABLE ON_DISPLAY ( id_no double,
                        );
 
 
-DROP ROLE IF EXISTS db_admin@localhost, read_access@localhost, db_entry@localhost;
 
-CREATE ROLE db_admin@localhost, read_access@localhost, db_entry@localhost;
 
-GRANT ALL PRIVILEGES ON MUSEUM.* TO db_admin@localhost;
+DROP ROLE IF EXISTS db_admin@localhost, db_entry@localhost, read_access@localhost;
+
+CREATE ROLE db_admin@localhost, db_entry@localhost, read_access@localhost;
+
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, RELOAD, SHUTDOWN, PROCESS, FILE, REFERENCES, INDEX, ALTER, SHOW DATABASES, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, REPLICATION SLAVE, REPLICATION CLIENT, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, CREATE USER, EVENT, TRIGGER, CREATE TABLESPACE, CREATE ROLE, DROP ROLE ON *.* TO db_admin@localhost WITH GRANT OPTION;
 GRANT INSERT, UPDATE, DELETE ON MUSEUM.* TO db_entry@localhost;
 GRANT SELECT ON MUSEUM.* TO read_access@localhost;
 
 DROP USER IF EXISTS administrator@localhost;
-DROP USER IF EXISTS guest@localhost;
 DROP USER IF EXISTS employee@localhost;
+DROP USER IF EXISTS guest@localhost;
 
 CREATE USER administrator@localhost IDENTIFIED WITH mysql_native_password BY 'password';
 CREATE USER employee@localhost IDENTIFIED WITH mysql_native_password BY '12345';
 CREATE USER guest@localhost;
 
+GRANT CREATE USER ON *.* TO db_admin@localhost;
+GRANT SUPER ON *.* TO db_admin@localhost;
+   
+GRANT SET_USER_ID ON *.* TO db_admin@localhost WITH GRANT OPTION;
 
 GRANT db_admin@localhost TO administrator@localhost;
 GRANT db_entry@localhost TO employee@localhost;
 GRANT read_access@localhost TO guest@localhost;
 
+
 SET DEFAULT ROLE ALL TO administrator@localhost;
 SET DEFAULT ROLE ALL TO employee@localhost;
 SET DEFAULT ROLE ALL TO guest@localhost;
 
+
 SELECT * FROM information_schema.USER_PRIVILEGES;
+
+FLUSH PRIVILEGES;
+
