@@ -248,6 +248,7 @@ def lookup(cur, cnx):
 def add(cur, cnx):
     # This function allows the user to add information to the database not using exact sql commands
     print("\nWelcome to the Add console:")
+    print("NOTE: You MUST add into art object before adding into any other table, other than creating a new collection or exhibition.")
     print("1 - Add Art Object")
     print("2 - Add Artist")
     print("3 - Add Collection")
@@ -370,8 +371,9 @@ def edit(cur, cnx):
             new_value = input("Please enter the new values for your selected values, separated by spaces. Make sure the order for both inputs are the same: ")
             new_value_list = new_value.split(' ')
             identifier = input("Please enter the id_no of the painting you would like to edit, separated by commas if there are multiple: ")
-        sql = "UPDATE %s SET %s = %s WHERE id_no = %s"
-        cur.execute(sql, (type, old_value_list[i], new_value_list[i], identifier,))
+        for i in range(len(old_value_list)):
+            update(cur, cnx, type, old_value_list[i], new_value_list[i], identifier)
+        print("Database updated successfully!")
     
 def update(cur, cnx, table, old_value, new_value, identifier):
     sql = "UPDATE %s SET %s = %s WHERE id_no = %s"
@@ -417,6 +419,7 @@ if __name__ == "__main__":
         passcode= input("Password: ")
 
     else:
+        print("Enter username as 'guest'\n")
         username="guest"
         passcode=None
 
