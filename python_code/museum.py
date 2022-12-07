@@ -265,6 +265,56 @@ def add(cur, cnx):
         print("Invalid selection, please try again.")
         data_entry_consol(cur, cnx)
 
+def edit(cur, cnx):
+    print("What would you like to edit: ")
+    print("1- Art Object")
+    print("2- Artist")
+    print("3- Collection")
+    print("4- Piece entering a collection")
+    print("5- Exhibition")
+    print("6- Piece on display")
+    print("7- Return to main menu")
+    selection = input("Please enter the number of your selection: ")
+    if selection == '1':
+        print("What would you like to edit: ")
+        print("1- Art Object")
+        print("2- Painting")
+        print("3- Sculpture")
+        print("4- Statue")
+        print("5- Other")
+        print("6- Borrowed")
+        print("7- Permanent Collection")
+        print("8- Return to main menu")
+        selection = input("Please enter the number of your selection: ")
+        if selection == '1':
+            print("What would you like to edit: ")
+            print("1- id_no")
+            print("2- title")
+            print("3- artist_id")
+            print("4- category")
+            print("5- location")
+            print("6- Return to main menu")
+            selection = input("Please enter the number of your selection: ")
+            if selection == '1':
+                identifier = input("Please enter the id_no of the art object you would like to edit: ")
+                new_value = input("Please enter the new value for id_no: ")
+                sql = "UPDATE art_object SET id_no = %s WHERE id_no = %s"
+                cur.execute(sql, (new_value, identifier,))
+                cnx.commit()
+                print("Database updated successfully!")
+            if selection == '2':
+                identifier = input("Please enter the id_no of the art object you would like to edit: ")
+                new_value = input("Please enter the new value for title: ")
+                sql = "UPDATE art_object SET title = %s WHERE id_no = %s"
+                cur.execute(sql, (new_value, identifier,))
+                cnx.commit()
+                print("Database updated successfully!")
+            if selection == '3':
+                identifier = input("Please enter the id_no of the art object you would like to edit: ")
+                new_value = input("Please enter the new value for artist_id: ")
+                sql = "UPDATE art_object SET artist_id = %s WHERE id_no = %s"
+                cur.execute(sql, (new_value, identifier,))
+
 def add_art_object_from_file(cur, cnx):
     filename = input("Please enter the name of the file you would like to add: ")
     fd = open(filename, 'r')
