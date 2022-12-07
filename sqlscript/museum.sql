@@ -132,7 +132,7 @@ INSERT INTO ART_OBJECT (id_no, Origin, Title, Epoch, Description, Year)
 		(20, 'Vietnamese', 'Napalm Girl', 'Modern', 'An unclothed girl sobbing',1972);
 
 INSERT INTO ARTIST (id_no, Name, Description, Date_born, Date_died, Country_of_origin, Epoch, Main_style)
- VALUES (1, 'Leonardo Da Vinci', 'Mona Lisa',1452,1519,Italy,'Renaissance','Renaissance'),
+ VALUES (1, 'Leonardo Da Vinci', 'Mona Lisa',1452,1519,'Italy','Renaissance','Renaissance'),
 		(2,'Leonardo Da Vinci', 'The Last Supper', 1452, 1519, 'Italy', 'Renaissance', 'Renaissance'),
 		(3,'Vincent Van Gogh','The Starry Night',1853,1890, 'Netherlands','Modern', 'Post-Impressionism'),
 		(4, 'Edvard Munch', 'Ecstasy of Saint Teresa', 1863, 1944, 'Norway', 'Modern', 'Post-Impressionism'),
