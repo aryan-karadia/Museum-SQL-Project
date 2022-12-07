@@ -162,11 +162,11 @@ INSERT INTO PAINTING (id_no, paint_type, drawn_on, Style)
 		(5, 'Animal', 1960, 'Modern');
 
 INSERT INTO SCULPTURE (id_no, Material, Height, Weight, Style)
- VALUES (6, 'Concrete/Soapstone', 30, 635),
-		(7, 'Copper/Steel', 93, 204),
-		(8, 'Concrete/Metal', 85, 8000),
-		(9, 'Copper', 128, 1000),
-		(10, 'Concrete/Bronze', 182, 67000);
+ VALUES (6, 'Concrete/Soapstone', 30, 635, 'Art-Deco'),
+		(7, 'Copper/Steel', 93, 204, 'Neoclassical'),
+		(8, 'Concrete/Metal', 85, 8000, 'Socialist Realism'),
+		(9, 'Copper', 128, 1000, 'Buddhist'),
+		(10, 'Concrete/Bronze', 182, 67000, 'Naturalistic');
 
 INSERT INTO STATUE (id_no, Material, Height, Weight, Style)
  VALUES (11, 'Marble', 5.17, 6, 'Renaissance'),
@@ -208,10 +208,10 @@ INSERT INTO EXHIBITIONS (Name, Start_date, End_date)
 	VALUES ('The Tudors', '03/12/2021', '03/02/2022');
 
 INSERT INTO IN_COLLECTION (id_no, Name)
-	VALUES (13, 'The Thinker');
+	VALUES (13, 'Musée Rodin');
 
 INSERT INTO ON_DISPLAY (id_no, Name)
- VALUES (1, 'Mona Lisa'),
-		(3, 'The Starry Night'),
-		(4, 'The Scream'),
-		(11, 'The Statue David');
+ VALUES (1, 'The Tudors'),
+		(3, 'The Tudors'),
+		(4, 'The Tudors'),
+		(11, 'The Tudors');
