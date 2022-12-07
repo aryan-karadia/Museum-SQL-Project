@@ -18,16 +18,18 @@ def format(cur, cnx):
 def admin_console(cur, cnx):
     print("\nWelcome to the Admin console:")
     print("1 - Add New User")
-    print("2 - Edit User")
-    print("3 - Block User")
-    print("4 - Change Database") 
-    print("5 - Exit")
+    print("2 - Manage Users")
+    print("3 - Edit Database") 
+    print("4 - Exit")
 
-    selection = input("please select 1, 2, 3, 4, 5: ")
+    selection = input("please select 1, 2, 3, 4: ")
 
     if selection == '1':
         add_user(cur, cnx)
-    if selection == '4':
+    if selection == '2':
+        manage_users(cur, cnx)
+
+    if selection == '3':
         print("\nWelcome to the Database console:")
         print("1 - Edit database through command line")
         print("2 - Edit database using a source file")
@@ -43,7 +45,7 @@ def admin_console(cur, cnx):
                 data_view(cur, cnx)
         if sub_selection == '2':
             add_art_object_from_file(cur, cnx)
-    if selection == '5':
+    if selection == '4':
         exit()
     else:
         print("Invalid selection, please try again")
@@ -118,6 +120,35 @@ def add_data_entry(cur, cnx):
     admin_console(cur, cnx)
     pass
 
+def manage_users(cur, cnx):
+    print("\nWelcome to the Manage Users console:")
+    print("1 - Edit User")
+    print("2 - Block User")
+    print("3 - Unblock User")
+
+    if selection == '1':
+        print("\nWelcome to the Edit User console:")
+        print("1 - Edit User Permissions")
+        print("2 - Edit User Password")
+        sub_selection = input("please select 1 or 2: ")
+        username = input("Please enter the username of the user you want to edit: ")
+        if sub_selection == '1':
+            new_role = input("Please enter the new role of the user(admin/employee, please type the full word): ")
+            sql = "SET ROLE %s TO %s@localhost"
+            cur.execute(sql, (new_role, username,), multi=True)
+            cnx.commit()
+            print("\nUser edited successfully!\n")
+            exit()
+        if sub_selection == '2':
+            new_password = input("Please enter the new password of the user: ")
+            sql = "ALTER USER %s@localhost IDENTIFIED BY %s"
+            cur.execute(sql, (username, new_password,), multi=True)
+            cnx.commit()
+            print("\nUser edited successfully!\n")
+            exit()
+
+    
+    pass
 def data_view(cur, cnx):
     # This function allows the user to view the database through the command line using exact sql commands
     command = input("Please enter the command you want to execute, enter q to quit: ")
