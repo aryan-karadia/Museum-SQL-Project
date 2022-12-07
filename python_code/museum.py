@@ -1,6 +1,7 @@
 import mysql.connector
 
 def format(cur, cnx):
+    #formatting the output of the query
     col_names = cur.column_names
     search_result = cur.fetchall()
     print("Search found ", len(search_result), " Entries:\n")
@@ -49,6 +50,7 @@ def admin_console(cur, cnx):
         admin_console(cur, cnx)
 
 def data_manipulate(cur, cnx):
+    # This function allows the user to manipulate the database through the command line using exact sql commands
     command = input("Please enter the command you want to execute, enter q to quit: ")
     while (command != 'q'):
         cur.execute(command)
@@ -74,13 +76,15 @@ def add_admin(cur, cnx):
     password = input("Password: ") or None
 
     sqlDropUser = "DROP USER IF EXISTS %s@localhost"
-    sqlCreateUser = "CREATE USER %s@localhost IDENTIFIED WITH mysql_native_password BY '%s'"
+    sqlCreateUser = "CREATE USER %s@localhost IDENTIFIED WITH mysql_native_password BY %s"
     sqlGrantUser = "GRANT db_admin@localhost TO %s@localhost"
+    sqlGrantUser2 = "GRANT CREATE USER on *.* TO %s@localhost WITH GRANT OPTION"
     sqlDefaultUser = "SET DEFAULT ROLE ALL TO %s@localhost" 
 
     cur.execute(sqlDropUser, (username,), multi=True)
     cur.execute(sqlCreateUser, (username, password,), multi=True)
     cur.execute(sqlGrantUser, (username,), multi=True)
+    cur.execute(sqlGrantUser2, (username,), multi=True)
     cur.execute(sqlDefaultUser, (username,), multi=True)
     cnx.commit()
     print("\nAdmin added successfully!\n")
@@ -95,17 +99,14 @@ def add_data_entry(cur, cnx):
 
     #sqlDropUser = "
 
-def data_view(cur, cnx, usr):
+def data_view(cur, cnx):
+    # This function allows the user to view the database through the command line using exact sql commands
     command = input("Please enter the command you want to execute, enter q to quit: ")
     print()
     while (command != 'q'):
         cur.execute(command)
         format(cur, cnx)
         command = input("Please enter the command you want to execute, enter q to quit: ")
-    if usr == 'admin':
-        admin_console(cur, cnx)
-    if usr == 'data_entry':
-        data_entry_console(cur, cnx)
 
 def data_entry_console(cur, cnx):
     print("\nWelcome to the Data Entry console:")
@@ -129,50 +130,57 @@ def data_entry_console(cur, cnx):
         data_entry_console(cur, cnx)
 
 def lookup(cur, cnx):
+    # This function allows the user to lookup information in the database not using exact sql commands
     print("\nWelcome to the lookup console:")
     print("1 - Lookup Artist")
-    print("2 - Lookup Painting")
-    print("3 - Lookup Sculpture")
-    print("4 - Lookup Statue")
-    print("5 - Lookup Other")
-    print("6 - Lookup Collection")
-    print("7 - Lookup Exhibitions")
-    print("8 - Lookup On Display")
-    print("9 - Go Back")
+    print("2 - Lookup Art object")
+    print("3 - Lookup Painting")
+    print("4 - Lookup Sculpture")
+    print("5 - Lookup Statue")
+    print("6 - Lookup Other")
+    print("7 - Lookup Collection")
+    print("8 - Lookup Exhibitions")
+    print("9 - Lookup On Display")
+    print("10 - Go Back")
 
-    selection = input("please select 1, 2, 3, 4, 5, 6, 7, 8: ")
+    selection = input("please select 1, 2, 3, 4, 5, 6, 7, 8, 9, 10: ")
 
+    # Looking up each specific type of art object using primary key
     if selection == '1':
         artist_name = input("Please enter the name of the artist: ")
         specific_lookup(cur, cnx, 'artist', artist_name)
     if selection == '2':
+        art_object_name = input("Please enter the id_no of the art object: ")
+        specific_lookup(cur, cnx, 'art_object', art_object_name)
+    if selection == '3':
         painting_name = input("Please enter the id_no of the painting: ")
         specific_lookup(cur, cnx, 'painting', painting_name)
-    if selection == '3':
+    if selection == '4':
         sculpture_name = input("Please enter the id_no of the sculpture: ")
         specific_lookup(cur, cnx, 'sculpture', sculpture_name)
-    if selection == '4':
+    if selection == '5':
         statue_name = input("Please enter the id_no of the statue: ")
         specific_lookup(cur, cnx, 'statue', statue_name)
-    if selection == '5':
+    if selection == '6':
         other_name = input("Please enter the id_no of the other: ")
         specific_lookup(cur, cnx, 'other', other_name)
-    if selection == '6':
+    if selection == '7':
         collection_name = input("Please enter the Name of the collection: ")
         specific_lookup(cur, cnx, 'collection', collection_name)
-    if selection == '7':
+    if selection == '8':
         exhibition_name = input("Please enter the Name of the exhibition: ")
         specific_lookup(cur, cnx, 'exhibition', exhibition_name)
-    if selection == '8':
+    if selection == '9':
         on_display_name = input("Please enter the id_no of the art object to check if it is on display or not: ")
         specific_lookup(cur, cnx, 'on_display', on_display_name)
-    if selection == '9':
+    if selection == '10':
         data_entry_console(cur, cnx)
     else:
         print("Invalid selection, please try again")
         lookup(cur, cnx)
 
 def add(cur, cnx):
+    # This function allows the user to add information to the database not using exact sql commands
     print("\nWelcome to the Add console:")
     print("1 - Add Art Object")
     print("2 - Add Artist")
@@ -180,14 +188,13 @@ def add(cur, cnx):
     print("4 - Add piece into collection")
     print("5 - Add Exhibition")
     print("6 - Add On Display")
-    print("7 - Go Back")
+    print("7 - Adding from file")
+    print("8 - Go Back")
 
     selection = input("please select 1, 2, 3, 4, 5, 6, 7: ")
 
     if selection == '1':
-        from_file = input("Would you like to add the art object from a file? (y/n): ")
-        if from_file == 'y':
-            add_art_object_from_file(cur, cnx)
+        #Figuring out which type of art object to add
         category = input(print("\nWhich category of art object would you like to add?\n Please make sure to enter the correctly spelled category name: "))
         location = input(print("Please enter if the art object is borrowed or part of the permanent_collection: "))
         values = input(print("Please enter the values for the art object in the following format: \n (id_no, origin, title, epoch, description, year) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
@@ -223,7 +230,7 @@ def add(cur, cnx):
         cnx.commit()
         print("Database updated successfully!")
 
-    if selection == '2':
+    if selection == '2':    
         values = input(print("Please enter the values for the artist in the following format:(id_no, name) \n Please make sure to enter the values in the correct order seperated by commas. enter NULL for any unknown values: "))
         artist_sqlcommand = "INSERT INTO artist (id_no, name) VALUES (%s)"
         cur.execute(artist_sqlcommand, (values))
@@ -259,11 +266,16 @@ def add(cur, cnx):
         print("Database updated successfully!")
     
     if selection == '7':
+        from_file = input("Would you like to add the art object from a file? (y/n): ")
+        if from_file == 'y':
+            add_art_object_from_file(cur, cnx)
+
+    if selection == '8':
         data_entry_console(cur, cnx)
 
     else:
         print("Invalid selection, please try again.")
-        data_entry_console(cur, cnx)
+        add(cur, cnx)
 
 def edit(cur, cnx):
     print("What would you like to edit: ")
@@ -275,45 +287,30 @@ def edit(cur, cnx):
     print("6- Piece on display")
     print("7- Return to main menu")
     selection = input("Please enter the number of your selection: ")
+
     if selection == '1':
-        print("What would you like to edit: ")
-        print("1- Art Object")
-        print("2- Painting")
-        print("3- Sculpture")
-        print("4- Statue")
-        print("5- Other")
-        print("6- Borrowed")
-        print("7- Permanent Collection")
-        print("8- Return to main menu")
-        selection = input("Please enter the number of your selection: ")
-        if selection == '1':
-            print("What would you like to edit: ")
-            print("1- id_no")
-            print("2- title")
-            print("3- artist_id")
-            print("4- category")
-            print("5- location")
-            print("6- Return to main menu")
-            selection = input("Please enter the number of your selection: ")
-            if selection == '1':
-                identifier = input("Please enter the id_no of the art object you would like to edit: ")
-                new_value = input("Please enter the new value for id_no: ")
-                sql = "UPDATE art_object SET id_no = %s WHERE id_no = %s"
-                cur.execute(sql, (new_value, identifier,))
-                cnx.commit()
-                print("Database updated successfully!")
-            if selection == '2':
-                identifier = input("Please enter the id_no of the art object you would like to edit: ")
-                new_value = input("Please enter the new value for title: ")
-                sql = "UPDATE art_object SET title = %s WHERE id_no = %s"
-                cur.execute(sql, (new_value, identifier,))
-                cnx.commit()
-                print("Database updated successfully!")
-            if selection == '3':
-                identifier = input("Please enter the id_no of the art object you would like to edit: ")
-                new_value = input("Please enter the new value for artist_id: ")
-                sql = "UPDATE art_object SET artist_id = %s WHERE id_no = %s"
-                cur.execute(sql, (new_value, identifier,))
+        old_value = input("Please enter the values of the art object you would like to edit, seperated by spaces: ")
+        old_value_list = old_value.split(' ')
+        new_value = input("Please enter the new values for your selected values, seperated by spaces. Make sure the order for both inputs are the same: ")
+        new_value_list = new_value.split(' ')
+        identifier = input("Please enter the id_no of the art objects you would like to edit, seperated by commas if there are multiple: ")
+        for i in range(len(old_value_list)):
+            update(cur, cnx, 'art_object', old_value_list[i], new_value_list[i], identifier)
+        print("Database updated successfully!")
+        type = input("Are you editing a painting, sculpture, statue, or other? (enter full word): ")
+        if type == 'painting':
+            old_value = input("Please enter the values of the painting you would like to edit, seperated by spaces: ")
+            old_value_list = old_value.split(' ')
+            new_value = input("Please enter the new values for your selected values, seperated by spaces. Make sure the order for both inputs are the same: ")
+            new_value_list = new_value.split(' ')
+            identifier = input("Please enter the id_no of the painting you would like to edit, seperated by commas if there are multiple: ")
+        sql = "UPDATE %s SET %s = %s WHERE id_no = %s"
+        cur.execute(sql, (type, old_value_list[i], new_value_list[i], identifier,))
+    
+def update(cur, cnx, table, old_value, new_value, identifier):
+    sql = "UPDATE %s SET %s = %s WHERE id_no = %s"
+    cur.execute(sql, (table, old_value, new_value, identifier,))
+    cnx.commit()
 
 def add_art_object_from_file(cur, cnx):
     filename = input("Please enter the name of the file you would like to add: ")
@@ -336,17 +333,7 @@ def specific_lookup(cur, cnx, lookup, identifier):
     format(cur, cnx)
 
 def guest_view():
-    print("What Information are you looking for: ")
-    print("1- ")
-    print("1- Event information")
-    print("2- Participant information")
-    print("3- Country information")
-    selection = input()
-
-    if selection == '2':
-        subselection = input('Please type 1 for Athletes or 2 for Coaches:\n')
-        if subselection == '1':
-            athlete_info(cur)
+    pass
 
 
 def athlete_info(cur):
@@ -422,7 +409,7 @@ if __name__ == "__main__":
     
 
     
-    #insert example
+    """#insert example
     inst_country_template= "insert into country values (%s,%s,%s,%s)"
 
     countryname= input("Please insert name of country to add: ")
@@ -443,7 +430,7 @@ if __name__ == "__main__":
     cnx.close()
 
 
-
+"""
 '''
 # Get a cursor
 cur = cnx.cursor()
