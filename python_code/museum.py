@@ -64,16 +64,23 @@ def add_user(cur, cnx):
     print("2 - Add New Data Entry User")
     sub_selection = input("please select 1 or 2: ")
 
+    while sub_selection != '1' and sub_selection != '2':
+        print("Invalid selection, please try again")
+        sub_selection = input("please select 1 or 2: ")
+
     if sub_selection == '1':
         add_admin(cur, cnx)
+    
+    if sub_selection == '2':
+        add_data_entry(cur, cnx)
 
     pass
 
 def add_admin(cur, cnx):
     print("\nWelcome to the Add Admin console:")
     print("Please enter the following information:")
-    username = input("User Name: ") or None
-    password = input("Password: ") or None
+    username = input("User Name: ")
+    password = input("Password: ")
 
     sqlDropUser = "DROP USER IF EXISTS %s@localhost"
     sqlCreateUser = "CREATE USER %s@localhost IDENTIFIED WITH mysql_native_password BY %s"
@@ -94,10 +101,22 @@ def add_admin(cur, cnx):
 def add_data_entry(cur, cnx):
     print("\nWelcome to the Add Data Entry console:")
     print("Please enter the following information:")
-    username = input("User Name: ") or None
-    password = input("Password: ") or None
+    username = input("User Name: ")
+    password = input("Password: ")
 
-    #sqlDropUser = "
+    sqlDropUser = "DROP USER IF EXISTS %s@localhost"
+    sqlCreateUser = "CREATE USER %s@localhost IDENTIFIED WITH mysql_native_password BY %s"
+    sqlGrantUser = "GRANT db_entry@localhost TO %s@localhost"
+    sqlDefaultUser = "SET DEFAULT ROLE ALL TO %s@localhost"
+
+    cur.execute(sqlDropUser, (username,), multi=True)
+    cur.execute(sqlCreateUser, (username, password,), multi=True)
+    cur.execute(sqlGrantUser, (username,), multi=True)
+    cur.execute(sqlDefaultUser, (username,), multi=True)
+    cnx.commit()
+    print("\nData Entry User added successfully!\n")
+    admin_console(cur, cnx)
+    pass
 
 def data_view(cur, cnx):
     # This function allows the user to view the database through the command line using exact sql commands
