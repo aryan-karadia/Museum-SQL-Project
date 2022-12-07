@@ -164,6 +164,18 @@ def manage_users(cur, cnx):
         cnx.commit()
         print("\nUser blocked successfully!\n")
         admin_console(cur, cnx)
+    
+    if selection == '3':
+        username = input("Please enter the username of the user you want to unblock: ")
+        usr_role = input("Please enter the role of the user you want to unblock(admin/employee): ")
+        if usr_role == 'admin':
+            sql = "GRANT ALL ON *.* TO %s@localhost"
+        if usr_role == 'employee':
+            sql = "GRANT SELECT, INSERT, UPDATE, DELETE ON *.* TO %s@localhost"
+        cur.execute(sql, (username,), multi=True)
+        cnx.commit()
+        print("\nUser unblocked successfully!\n")
+        admin_console(cur, cnx)
 
 def data_view(cur, cnx):
     # This function allows the user to view the database through the command line using exact sql commands
