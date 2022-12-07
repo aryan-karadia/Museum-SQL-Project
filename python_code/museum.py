@@ -14,8 +14,8 @@ def format(cur, cnx):
             print("{:<35s}".format(str(search_result[i][x])), end='')
         print()
 
-def admin_consol(cur, cnx):
-    print("\nWelcome to the Admin Consol:")
+def admin_console(cur, cnx):
+    print("\nWelcome to the Admin console:")
     print("1 - Add New User")
     print("2 - Edit User")
     print("3 - Block User")
@@ -27,7 +27,7 @@ def admin_consol(cur, cnx):
     if selection == '1':
         add_user(cur, cnx)
     if selection == '4':
-        print("\nWelcome to the Database Consol:")
+        print("\nWelcome to the Database console:")
         print("1 - Edit database through command line")
         print("2 - Edit database using a source file")
         sub_selection = input("please select 1 or 2: ")
@@ -46,7 +46,7 @@ def admin_consol(cur, cnx):
         exit()
     else:
         print("Invalid selection, please try again")
-        admin_consol(cur, cnx)
+        admin_console(cur, cnx)
 
 def data_manipulate(cur, cnx):
     command = input("Please enter the command you want to execute, enter q to quit: ")
@@ -57,7 +57,7 @@ def data_manipulate(cur, cnx):
         command = input("Please enter the command you want to execute, enter q to quit: ")
     
 def add_user(cur, cnx):
-    print("\nWelcome to the Add User Consol:")
+    print("\nWelcome to the Add User console:")
     print("1 - Add New Admin")
     print("2 - Add New Data Entry User")
     sub_selection = input("please select 1 or 2: ")
@@ -68,7 +68,7 @@ def add_user(cur, cnx):
     pass
 
 def add_admin(cur, cnx):
-    print("\nWelcome to the Add Admin Consol:")
+    print("\nWelcome to the Add Admin console:")
     print("Please enter the following information:")
     username = input("User Name: ") or None
     password = input("Password: ") or None
@@ -84,11 +84,11 @@ def add_admin(cur, cnx):
     cur.execute(sqlDefaultUser, (username,), multi=True)
     cnx.commit()
     print("\nAdmin added successfully!\n")
-    admin_consol(cur, cnx)
+    admin_console(cur, cnx)
     pass
 
 def add_data_entry(cur, cnx):
-    print("\nWelcome to the Add Data Entry Consol:")
+    print("\nWelcome to the Add Data Entry console:")
     print("Please enter the following information:")
     username = input("User Name: ") or None
     password = input("Password: ") or None
@@ -103,12 +103,12 @@ def data_view(cur, cnx, usr):
         format(cur, cnx)
         command = input("Please enter the command you want to execute, enter q to quit: ")
     if usr == 'admin':
-        admin_consol(cur, cnx)
+        admin_console(cur, cnx)
     if usr == 'data_entry':
-        data_entry_consol(cur, cnx)
+        data_entry_console(cur, cnx)
 
-def data_entry_consol(cur, cnx):
-    print("\nWelcome to the Data Entry Consol:")
+def data_entry_console(cur, cnx):
+    print("\nWelcome to the Data Entry console:")
     print("1 - Lookup Information")
     print("2 - Add Information")
     print("3 - Edit Information")
@@ -126,10 +126,10 @@ def data_entry_consol(cur, cnx):
         exit()
     else:
         print("Invalid selection, please try again")
-        data_entry_consol(cur, cnx)
+        data_entry_console(cur, cnx)
 
 def lookup(cur, cnx):
-    print("\nWelcome to the lookup Consol:")
+    print("\nWelcome to the lookup console:")
     print("1 - Lookup Artist")
     print("2 - Lookup Painting")
     print("3 - Lookup Sculpture")
@@ -167,13 +167,13 @@ def lookup(cur, cnx):
         on_display_name = input("Please enter the id_no of the art object to check if it is on display or not: ")
         specific_lookup(cur, cnx, 'on_display', on_display_name)
     if selection == '9':
-        data_entry_consol(cur, cnx)
+        data_entry_console(cur, cnx)
     else:
         print("Invalid selection, please try again")
         lookup(cur, cnx)
 
 def add(cur, cnx):
-    print("\nWelcome to the Add Consol:")
+    print("\nWelcome to the Add console:")
     print("1 - Add Art Object")
     print("2 - Add Artist")
     print("3 - Add Collection")
@@ -259,11 +259,11 @@ def add(cur, cnx):
         print("Database updated successfully!")
     
     if selection == '7':
-        data_entry_consol(cur, cnx)
+        data_entry_console(cur, cnx)
 
     else:
         print("Invalid selection, please try again.")
-        data_entry_consol(cur, cnx)
+        data_entry_console(cur, cnx)
 
 def edit(cur, cnx):
     print("What would you like to edit: ")
@@ -414,9 +414,9 @@ if __name__ == "__main__":
 
 
     if selection == '1':
-        admin_consol(cur, cnx)
+        admin_console(cur, cnx)
     elif selection == '2':
-        data_entry_consol(cur, cnx)
+        data_entry_console(cur, cnx)
     else:
         guest_view()
     
