@@ -185,10 +185,10 @@ INSERT INTO OTHER (id_no, Type, Style)
 INSERT INTO COLLECTIONS (Name, Phone, Contact_person, Street_address, City, Country, Postal_code, Type, Description)
  VALUES ('Louvre', 140205050, 'Jean Hollande', 'Musée du Louvre', 'Paris', 'France', 75001, 'Renaissance', 'Renaissance art'),
 		('The Museum of Modern Art', 2127089400, 'Adam McCormick', '11 W 53rd St', 'New York City', 'USA', 10019, 'Modern', 'Modern Art'),
-		('National Museum of Oslo', 21982000, 'Erik Magnusson', 'Brynjulf Bulls plass 3', 'Oslo', 'Norway', 250),
-		('Accademia Gallery', 0550987100, 'Antonio Basillieni', 'Via Ricasoli, 58/60', 'Firenze Fi', 'Italy', 50129),
-		('Musée Rodin', 144186110, 'Francois Dubois', '77 Rue de Varenne', 'Paris', 'France', 75007),
-		('Brussels City Museum', 22794350, 'Michel Peeters', 'Grote Markt van', 'Brussels', 'Belgium', 1000);
+		('National Museum of Oslo', 21982000, 'Erik Magnusson', 'Brynjulf Bulls plass 3', 'Oslo', 'Norway', 250, 'Abstract', 'Modern Art'),
+		('Accademia Gallery', 0550987100, 'Antonio Basillieni', 'Via Ricasoli, 58/60', 'Firenze Fi', 'Italy', 50129, 'Renaissance', 'Renaissance Art'),
+		('Musée Rodin', 144186110, 'Francois Dubois', '77 Rue de Varenne', 'Paris', 'France', 75007, 'Modern', 'Modern Art'),
+		('Brussels City Museum', 22794350, 'Michel Peeters', 'Grote Markt van', 'Brussels', 'Belgium', 1000, 'Renaissance', 'Renaissance Art');
 
 
 INSERT INTO PERMANENT_COLLECTION (id_no, Status, Cost, Date_acquired)
