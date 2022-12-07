@@ -141,7 +141,7 @@ INSERT INTO ARTIST (id_no, Name, Description, Date_born, Date_died, Country_of_o
 		(7, 'Auguste Bartholdi', 'Statue of Liberty', 1834, 1904, 'France', 'Modern', 'Modern'),
 		(8, 'Yevgeny Vuchetich', 'Mother Russia Statue' , 1908, 1974, 'Ukraine', 'Modern', 'Modern'),
 		(9, 'Hai Tong', 'Spring Temple Buddha', 720, 760, 'China', 'Ancient', 'Ancient Chinese'),
-		(10, 'Ram Suttar', 'Statue of Unity', '1925', '2022','India', 'Modern', 'Modern'),
+		(10, 'Ram Suttar', 'Statue of Unity', 1925, 2022,'India', 'Modern', 'Modern'),
 		(11, 'Michelangelo', 'The Statue David', 1475, 1564, 'Italy', 'Renaissance', 'Renaissance'),
 		(12, 'Gian Lorenzo Bernini', 'Ecstasy of Saint Teresa', 1598, 1680, 'Italy', 'Renaissance', 'Renaissance'),
 		(13, 'Auguste Rodin', 'The Thinker', 1840, 1917, 'France', 'Modern', 'Expressionist Human'),
@@ -151,7 +151,7 @@ INSERT INTO ARTIST (id_no, Name, Description, Date_born, Date_died, Country_of_o
 		(17, 'Charles Clyde Ebbets', 'Lunch atop a skyscraper',1905,1978, 'American', 'Modern','Modern'),
 		(18, 'Alfred Eisenstaedt', 'V-J Day in Times Square', 1898, 1995, 'Polish', 'Modern', 'Modern'),
 		(19, 'Malcome Brown', 'The Burning Monk', 1931, 2012, 'American', 'Modern', 'Modern'),
-		(20, 'Nick Ut', 'Napalm Girl', 1951, ,'American', 'Modern', 'Modern');
+		(20, 'Nick Ut', 'Napalm Girl', 1951, 2022,'American', 'Modern', 'Modern');
 
 
 INSERT INTO PAINTING (id_no, paint_type, drawn_on, Style)
