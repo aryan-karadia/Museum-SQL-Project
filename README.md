@@ -27,6 +27,8 @@ Queries:
 
 Data Collection on Paintings, Sculptures, Statues, and Others. 5 each for each category. Data collection on artists, exhibitions, and collections.
 
+Queries for populating the database.
+
 ### Akshpreet:
 Created and populated the database. Wrote the following Queries with Rohil:
 1) Show all tables and explain how they are related to one another (keys, triggers, etc.)
