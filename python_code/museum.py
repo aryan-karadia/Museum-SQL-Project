@@ -385,7 +385,7 @@ def add(cur, cnx):
         add(cur, cnx)
 
 def edit(cur, cnx):
-    print("What would you like to edit: ")
+    print("\nWhat would you like to edit: ")
     print("1- Art Object")
     print("2- Artist")
     print("3- Collection")
