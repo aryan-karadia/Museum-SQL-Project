@@ -431,7 +431,7 @@ if __name__ == "__main__":
         passcode= input("Password: ")
 
     else:
-        print("Enter username as 'guest'\n")
+        print("Enter username as 'guest' and no password\n")
         username="guest"
         passcode=None
 
