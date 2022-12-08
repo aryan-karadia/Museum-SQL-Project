@@ -26,10 +26,10 @@ def admin_console(cur, cnx):
 
     if selection == '1':
         add_user(cur, cnx)
-    if selection == '2':
+    elif selection == '2':
         manage_users(cur, cnx)
 
-    if selection == '3':
+    elif selection == '3':
         print("\nWelcome to the Database console:")
         print("1 - Edit database through command line")
         print("2 - Edit database using a source file")
@@ -41,11 +41,11 @@ def admin_console(cur, cnx):
             sub_select = input("please select 1 or 2: ")
             if sub_select == '1':
                 data_manipulate(cur, cnx)
-            if sub_select == '2':
+            elif sub_select == '2':
                 data_view(cur, cnx)
-        if sub_selection == '2':
+        elif sub_selection == '2':
             add_art_object_from_file(cur, cnx)
-    if selection == '4':
+    elif selection == '4':
         exit()
     else:
         print("Invalid selection, please try again")
@@ -199,13 +199,13 @@ def data_entry_console(cur, cnx):
     if selection == '1':
         print("\nWelcome to the lookup console:")
         lookup(cur, cnx, 'data_entry')
-    if selection == '2':
+    elif selection == '2':
         add(cur, cnx)
-    if selection == '3':
+    elif selection == '3':
         edit(cur, cnx)
-    if selection == '4':
+    elif selection == '4':
         delete(cur, cnx)
-    if selection == '5':
+    elif selection == '5':
         exit()
     else:
         print("Invalid selection, please try again")
@@ -222,9 +222,9 @@ def lookup(cur, cnx, usr):
     print("7 - Lookup Collection")
     print("8 - Lookup Exhibitions")
     print("9 - Lookup On Display")
-    print("10 - Go Back/Quit as Guest")
+    print("10 - Go Back/Quit")
 
-    selection = input("Please Select 1, 2, 3, 4, 5, 6, 7, 8, 9, 10: ")
+    selection = input("\nPlease Select 1, 2, 3, 4, 5, 6, 7, 8, 9, 10: ")
 
     # Looking up each specific type of art object using primary key
     if selection == '1':
@@ -285,7 +285,7 @@ def add(cur, cnx):
     print("7 - Adding from file")
     print("8 - Go Back")
 
-    selection = input("please select 1, 2, 3, 4, 5, 6, 7: ")
+    selection = input("please select 1, 2, 3, 4, 5, 6, 7, 8: ")
 
     if selection == '1':
         #Figuring out which type of art object to add
@@ -304,27 +304,27 @@ def add(cur, cnx):
             values = tuple([x for x in input().split(',')])
             painting_sqlcommand = "INSERT INTO painting (id_no, paint_type, drawn_on, style) VALUES (%s, %s, %s, %s)"
             cur.execute(painting_sqlcommand, values)            
-        if category == 'sculpture':
+        elif category == 'sculpture':
             print("Please enter the values for the sculpture in the following format: \n(id_no, material, height, weight, style) \nPlease make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
             values = tuple([x for x in input().split(',')])
             sculpture_sqlcommand = "INSERT INTO sculpture (id_no, material, height, weight, style) VALUES (%s, %s, %s, %s, %s)"
             cur.execute(sculpture_sqlcommand, values)           
-        if category == 'statue':
+        elif category == 'statue':
             print("Please enter the values for the statue in the following format: \n(id_no, material, height, weight, style) \nPlease make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
             values = tuple([x for x in input().split(',')])
             statue_sqlcommand = "INSERT INTO statue (id_no, material, height, weight, style) VALUES (%s, %s, %s, %s, %s)"
             cur.execute(statue_sqlcommand, values)           
-        if category == 'other':
+        elif category == 'other':
             print("Please enter the values for the other in the following format: \n(id_no, type, style) \nPlease make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
             values = tuple([x for x in input().split(',')])
             other_sqlcommand = "INSERT INTO other (id_no, material, type, style) VALUES (%s, %s, %s)"
             cur.execute(other_sqlcommand, values)           
-        if location == 'borrowed':
+        elif location == 'borrowed':
             print("Please enter the values for the borrowed art object in the following format: \n(id_no, collection_origin, date_borrowed, date_returned) \nPlease make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
             values = tuple([x for x in input().split(',')])
             borrowed_sqlcommand = "INSERT INTO borrowed (id_no, collection_origin, date_borrowed, date_returned) VALUES (%s, %s, %s, %s)"
             cur.execute(borrowed_sqlcommand, values)            
-        if location == 'permanent_collection':
+        elif location == 'permanent_collection':
             print("Please enter the values for the permanent_collection art object in the following format: \n(id_no, status, cost, date_acquired) \nPlease make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
             values = tuple([x for x in input().split(',')])
             permanent_collection_sqlcommand = "INSERT INTO permanent_collection (id_no, status, cost, date_acquired) VALUES (%s, %s, %s, %s)"
@@ -332,7 +332,7 @@ def add(cur, cnx):
         cnx.commit()
         print("Database updated successfully!")
 
-    if selection == '2':    
+    elif selection == '2':    
         print("Please enter the values for the artist in the following format:(id_no, name) \nPlease make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
         values = tuple([x for x in input().split(',')])
         artist_sqlcommand = "INSERT INTO artist (id_no, name) VALUES (%s, %s)"
@@ -340,7 +340,7 @@ def add(cur, cnx):
         cnx.commit()
         print("Database updated successfully!")
     
-    if selection == '3':
+    elif selection == '3':
         print("Please enter the values for the collection in the following format:(name, phone, contact_person, street_address, city, country, postal_code, type, description) \nPlease make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
         values = tuple([x for x in input().split(',')])
         collection_sqlcommand = "INSERT INTO collection (name, phone, contact_person, street_address, city, country, postal_code, type, description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -348,7 +348,7 @@ def add(cur, cnx):
         cnx.commit()
         print("Database updated successfully!")
     
-    if selection == '4':
+    elif selection == '4':
         print("Please enter the values for the piece entering a collection in the following format:(id_no, name) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
         values = tuple([x for x in input().split(',')])
         exhibition_sqlcommand = "INSERT INTO in_collection (id_no, name) VALUES (%s, %s)"
@@ -356,7 +356,7 @@ def add(cur, cnx):
         cnx.commit()
         print("Database updated successfully!")
     
-    if selection == '5':
+    elif selection == '5':
         print("Please enter the values for an exhibition in the following format:(name, start_date, end_date) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
         values = tuple([x for x in input().split(',')])
         exhibition_sqlcommand = "INSERT INTO exhibitions (name, start_date, end_date) VALUES (%s, %s, %s)"
@@ -364,7 +364,7 @@ def add(cur, cnx):
         cnx.commit()
         print("Database updated successfully!")
     
-    if selection == '6':
+    elif selection == '6':
         print("Please enter the values for a piece being on_display or not in the following format:(id_no, name) \nPlease make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
         values = tuple([x for x in input().split(',')])
         exhibition_sqlcommand = "INSERT INTO on_display (id_no, name) VALUES (%s, %s)"
@@ -372,12 +372,12 @@ def add(cur, cnx):
         cnx.commit()
         print("Database updated successfully!")
     
-    if selection == '7':
+    elif selection == '7':
         from_file = input("Would you like to add the art object from a file? (y/n): ")
         if from_file == 'y':
             add_art_object_from_file(cur, cnx)
 
-    if selection == '8':
+    elif selection == '8':
         data_entry_console(cur, cnx)
 
     else:
@@ -416,7 +416,7 @@ def edit(cur, cnx):
         print("Database updated successfully!")
 
 def delete(cur, cnx):
-    print("What would you like to delete: ")
+    print("\nWhat would you like to delete: ")
     print("1- Art Object")
     print("2- Artist")
     print("3- Exhibition")
@@ -436,45 +436,48 @@ def delete(cur, cnx):
             cur.execute(sql, (identifier,))
             cnx.commit()
             print("Database updated successfully!")
-        if type == 'sculpture':
+        elif type == 'sculpture':
             sql = "DELETE FROM sculpture WHERE id_no = %s"
             cur.execute(sql, (identifier,))
             cnx.commit()
             print("Database updated successfully!")
-        if type == 'statue':
+        elif type == 'statue':
             sql = "DELETE FROM statue WHERE id_no = %s"
             cur.execute(sql, (identifier,))
             cnx.commit()
             print("Database updated successfully!")
-        if type == 'other':
+        elif type == 'other':
             sql = "DELETE FROM other WHERE id_no = %s"
             cur.execute(sql, (identifier,))
             cnx.commit()
             print("Database updated successfully!")
         location = input("Is the art object in a collection or on display? (IN_COLLECTION or ON_DISPLAY): ")
+
         if location == 'IN_COLLECTION':
             sql = "DELETE FROM in_collection WHERE id_no = %s"
             cur.execute(sql, (identifier,))
             cnx.commit()
             print("Database updated successfully!")
-        if location == 'ON_DISPLAY':
+
+        elif location == 'ON_DISPLAY':
             sql = "DELETE FROM on_display WHERE id_no = %s"
             cur.execute(sql, (identifier,))
             cnx.commit()
             print("Database updated successfully!")
-        origin = input("Is the art object permanently owned by the museum or borrowed? (PERMANENT or BORROWED): ")
+            origin = input("Is the art object permanently owned by the museum or borrowed? (PERMANENT or BORROWED): ")
+
         if origin == 'PERMANENT':
             sql = "DELETE FROM permanent_collection WHERE id_no = %s"
             cur.execute(sql, (identifier,))
             cnx.commit()
             print("Database updated successfully!")
-        if origin == 'BORROWED':
+        elif origin == 'BORROWED':
             sql = "DELETE FROM borrowed WHERE id_no = %s"
             cur.execute(sql, (identifier,))
             cnx.commit()
             print("Database updated successfully!")
 
-    if selection == '2':
+    elif selection == '2':
         print("Please enter the name of the artist you would like to delete: ")
         identifier = input()
         sql = "DELETE FROM artist WHERE name = %s"
@@ -482,15 +485,19 @@ def delete(cur, cnx):
         cnx.commit()
         print("Database updated successfully!")
 
-    if selection == '3':
+    elif selection == '3':
         identifier = input("Please enter the name of the exhibition you wish to delete: ")
         sql = "DELETE FROM collection WHERE name = %s"
         cur.execute(sql, (identifier,))
         cnx.commit()
         print("Database updated successfully!")
 
-    if selection == '4':
+    elif selection == '4':
         data_entry_console(cur, cnx)
+
+    else:
+        print("Please enter a valid input.")
+        delete(cur, cnx)
     
 def update(cur, cnx, table, old_value, new_value, identifier):
     sql = "UPDATE %s SET %s = %s WHERE id_no = %s"
