@@ -281,71 +281,71 @@ def add(cur, cnx):
 
     if selection == '1':
         #Figuring out which type of art object to add
-        category = input(print("\nWhich category of art object would you like to add?\n Please make sure to enter the correctly spelled category name: "))
-        location = input(print("Please enter if the art object is borrowed or part of the permanent_collection: "))
-        values = input(print("Please enter the values for the art object in the following format: \n (id_no, origin, title, epoch, description, year) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: "))
+        category = input("\nWhich category of art object would you like to add?\n Please make sure to enter the correctly spelled category name: ")
+        location = input("Please enter if the art object is borrowed or part of the permanent_collection: "))
+        values = input("Please enter the values for the art object in the following format: \n (id_no, origin, title, epoch, description, year) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
 
         art_object_sqlcommand = "INSERT INTO art_object (id_no, origin, title, epoch, description, year) VALUES (%s)"
         cur.execute(art_object_sqlcommand, (values))
         cnx.commit()
 
         if category == 'painting':
-            values = input(print("Please enter the values for the painting in the following format: \n (id_no, paint_type, drawn_on, style) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: "))
+            values = input("Please enter the values for the painting in the following format: \n (id_no, paint_type, drawn_on, style) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
             painting_sqlcommand = "INSERT INTO painting (id_no, paint_type, drawn_on, style) VALUES (%s)"
             cur.execute(painting_sqlcommand, (values))            
         if category == 'sculpture':
-            values = input(print("Please enter the values for the sculpture in the following format: \n (id_no, material, height, weight, style) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: "))
+            values = input("Please enter the values for the sculpture in the following format: \n (id_no, material, height, weight, style) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
             sculpture_sqlcommand = "INSERT INTO sculpture (id_no, material, height, weight, style) VALUES (%s)"
             cur.execute(sculpture_sqlcommand, (values))           
         if category == 'statue':
-            values = input(print("Please enter the values for the statue in the following format: \n (id_no, material, height, weight, style) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: "))
+            values = input("Please enter the values for the statue in the following format: \n (id_no, material, height, weight, style) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
             statue_sqlcommand = "INSERT INTO statue (id_no, material, height, weight, style) VALUES (%s)"
             cur.execute(statue_sqlcommand, (values))           
         if category == 'other':
-            values = input(print("Please enter the values for the other in the following format: \n (id_no, type, style) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: "))
+            values = input("Please enter the values for the other in the following format: \n (id_no, type, style) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
             other_sqlcommand = "INSERT INTO other (id_no, material, type, style) VALUES (%s)"
             cur.execute(other_sqlcommand, (values))           
         if location == 'borrowed':
-            values = input(print("Please enter the values for the borrowed art object in the following format: \n (id_no, collection_origin, date_borrowed, date_returned) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: "))
+            values = input("Please enter the values for the borrowed art object in the following format: \n (id_no, collection_origin, date_borrowed, date_returned) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
             borrowed_sqlcommand = "INSERT INTO borrowed (id_no, collection_origin, date_borrowed, date_returned) VALUES (%s)"
             cur.execute(borrowed_sqlcommand, (values))            
         if location == 'permanent_collection':
-            values = input(print("Please enter the values for the permanent_collection art object in the following format: \n (id_no, status, cost, date_acquired) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: "))
+            values = input("Please enter the values for the permanent_collection art object in the following format: \n (id_no, status, cost, date_acquired) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
             permanent_collection_sqlcommand = "INSERT INTO permanent_collection (id_no, status, cost, date_acquired) VALUES (%s)"
             cur.execute(permanent_collection_sqlcommand, (values))           
         cnx.commit()
         print("Database updated successfully!")
 
     if selection == '2':    
-        values = input(print("Please enter the values for the artist in the following format:(id_no, name) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: "))
+        values = input("Please enter the values for the artist in the following format:(id_no, name) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
         artist_sqlcommand = "INSERT INTO artist (id_no, name) VALUES (%s)"
         cur.execute(artist_sqlcommand, (values))
         cnx.commit()
         print("Database updated successfully!")
     
     if selection == '3':
-        values = input(print("Please enter the values for the collection in the following format:(name, phone, contact_person, street_address, city, country, postal_code, type, description) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: "))
+        values = input("Please enter the values for the collection in the following format:(name, phone, contact_person, street_address, city, country, postal_code, type, description) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
         collection_sqlcommand = "INSERT INTO collection (name, phone, contact_person, street_address, city, country, postal_code, type, description) VALUES (%s)"
         cur.execute(collection_sqlcommand, (values))
         cnx.commit()
         print("Database updated successfully!")
     
     if selection == '4':
-        values = input(print("Please enter the values for the piece entering a collection in the following format:(id_no, name) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: "))
+        values = input("Please enter the values for the piece entering a collection in the following format:(id_no, name) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
         exhibition_sqlcommand = "INSERT INTO in_collection (id_no, name) VALUES (%s)"
         cur.execute(exhibition_sqlcommand, (values))
         cnx.commit()
         print("Database updated successfully!")
     
     if selection == '5':
-        values = input(print("Please enter the values for an exhibition in the following format:(name, start_date, end_date) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: "))
+        values = input("Please enter the values for an exhibition in the following format:(name, start_date, end_date) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
         exhibition_sqlcommand = "INSERT INTO exhibitions (name, start_date, end_date) VALUES (%s)"
         cur.execute(exhibition_sqlcommand, (values))
         cnx.commit()
         print("Database updated successfully!")
     
     if selection == '6':
-        values = input(print("Please enter the values for a piece being on_display or not in the following format:(id_no, name) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: "))
+        values = input("Please enter the values for a piece being on_display or not in the following format:(id_no, name) \n Please make sure to enter the values in the correct order separated by commas. enter NULL for any unknown values: ")
         exhibition_sqlcommand = "INSERT INTO on_display (id_no, name) VALUES (%s)"
         cur.execute(exhibition_sqlcommand, (values))
         cnx.commit()
