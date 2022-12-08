@@ -42,8 +42,14 @@ Created and populated the database. Wrote the following Queries with Rohil:
 - modify this file to include any notes on how to use and run the program
 - include any features you have added beyond the minimum requirements in a features list
 
-## Organization:
-- code folder: contains your main python application code
-- sql scripts folder: contains all sql scripts required (database creation and initialization, sql script with query tasks in the handout, etc...)
-- database design folder: EERD and relational schema
-- optional data folder: has data files that you can sue to load data to your application if you use this optional implementation requirement
+## Notes
+To initially start this application, you have two credentials:
+### Username: Administrator
+### Password: password
+
+or
+
+### Username: employee
+### Password: 12345
+
+Signing in as guest requires no username or password inputs.
