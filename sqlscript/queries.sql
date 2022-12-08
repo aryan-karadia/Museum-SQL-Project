@@ -45,6 +45,8 @@ SHOW TABLES;
 --
 -- TRIGGERS:
 -- Two triggers were used between the tables IN_COLLECTION and ON_DISPLAY. The triggers used were 'Update' and 'Delete'.
+
+
 -- 2) A basic retrieval query
 SELECT Name, Description, Date_born, Date_died
 FROM ARTIST
