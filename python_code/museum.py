@@ -261,7 +261,7 @@ def lookup(cur, cnx, usr):
         if usr == 'data_entry':
             data_entry_console(cur, cnx)
         if usr == 'guest':
-            guest_view(cur, cnx)
+            exit()
     else:
         print("Invalid selection, please try again")
     print("\nWelcome to the lookup console:")
@@ -428,7 +428,6 @@ def specific_lookup(cur, cnx, lookup, identifier):
 def guest_view():
     print("\nWelcome to the Guest Console")
     lookup(cur, cnx, 'guest')
-    exit()
 
 if __name__ == "__main__":
     
