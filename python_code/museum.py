@@ -7,12 +7,12 @@ def format(cur, cnx):
     print("Search found ", len(search_result), " Entries:\n")
     header_size = len(col_names)
     for i in range(header_size):
-        print("{:<35s}".format(col_names[i]), end='')
+        print("{:<25s}".format(col_names[i]), end='')
     print()
-    print(30 * header_size * '-')
+    print(23 * header_size * '-')
     for i in range(len(search_result)):
         for x in range(len(search_result[i])):
-            print("{:<35s}".format(str(search_result[i][x])), end='')
+            print("{:<25s}".format(str(search_result[i][x])), end='')
         print()
 
 def admin_console(cur, cnx):
@@ -196,6 +196,7 @@ def data_entry_console(cur, cnx):
     selection = input("please select 1, 2, 3, 4: ")
 
     if selection == '1':
+        print("\nWelcome to the lookup console:")
         lookup(cur, cnx)
     if selection == '2':
         add(cur, cnx)
@@ -209,7 +210,6 @@ def data_entry_console(cur, cnx):
 
 def lookup(cur, cnx):
     # This function allows the user to lookup information in the database not using exact sql commands
-    print("\nWelcome to the lookup console:")
     print("1 - Lookup Artist")
     print("2 - Lookup Art object")
     print("3 - Lookup Painting")
@@ -221,40 +221,43 @@ def lookup(cur, cnx):
     print("9 - Lookup On Display")
     print("10 - Go Back")
 
-    selection = input("please select 1, 2, 3, 4, 5, 6, 7, 8, 9, 10: ")
+    selection = input("Please Select 1, 2, 3, 4, 5, 6, 7, 8, 9, 10: ")
 
     # Looking up each specific type of art object using primary key
     if selection == '1':
         artist_name = input("Please enter the name of the artist: ")
-        specific_lookup(cur, cnx, 'artist', artist_name)
-    if selection == '2':
+        sql = "SELECT * FROM artist WHERE name = %s"
+        cur.execute(sql, (artist_name,))
+        format(cur, cnx)
+    elif selection == '2':
         art_object_name = input("Please enter the id_no of the art object: ")
         specific_lookup(cur, cnx, 'art_object', art_object_name)
-    if selection == '3':
+    elif selection == '3':
         painting_name = input("Please enter the id_no of the painting: ")
         specific_lookup(cur, cnx, 'painting', painting_name)
-    if selection == '4':
+    elif selection == '4':
         sculpture_name = input("Please enter the id_no of the sculpture: ")
         specific_lookup(cur, cnx, 'sculpture', sculpture_name)
-    if selection == '5':
+    elif selection == '5':
         statue_name = input("Please enter the id_no of the statue: ")
         specific_lookup(cur, cnx, 'statue', statue_name)
-    if selection == '6':
+    elif selection == '6':
         other_name = input("Please enter the id_no of the other: ")
         specific_lookup(cur, cnx, 'other', other_name)
-    if selection == '7':
+    elif selection == '7':
         collection_name = input("Please enter the Name of the collection: ")
         specific_lookup(cur, cnx, 'collection', collection_name)
-    if selection == '8':
+    elif selection == '8':
         exhibition_name = input("Please enter the Name of the exhibition: ")
         specific_lookup(cur, cnx, 'exhibition', exhibition_name)
-    if selection == '9':
+    elif selection == '9':
         on_display_name = input("Please enter the id_no of the art object to check if it is on display or not: ")
         specific_lookup(cur, cnx, 'on_display', on_display_name)
-    if selection == '10':
+    elif selection == '10':
         data_entry_console(cur, cnx)
     else:
         print("Invalid selection, please try again")
+        print("\nWelcome to the lookup console:")
         lookup(cur, cnx)
 
 def add(cur, cnx):
@@ -413,12 +416,13 @@ def specific_lookup(cur, cnx, lookup, identifier):
     format(cur, cnx)
 
 def guest_view():
-    pass
+    print("\nWelcome to the Guest Console")
+    lookup(cur, cnx)
 
 if __name__ == "__main__":
     
     # Connect to server
-    print("Welcome to the Museum Database:")
+    print("\nWelcome to the Museum Database:")
     print("In order to proceed please select your role from the list below:")
     print("1 - DB Admin")
     print("2 - Data Entry")
@@ -431,7 +435,6 @@ if __name__ == "__main__":
         passcode= input("Password: ")
 
     else:
-        print("Enter username as 'guest' and no password\n")
         username="guest"
         passcode=None
 
@@ -451,5 +454,5 @@ if __name__ == "__main__":
         admin_console(cur, cnx)
     elif selection == '2':
         data_entry_console(cur, cnx)
-    else:
+    elif selection == '3':
         guest_view()

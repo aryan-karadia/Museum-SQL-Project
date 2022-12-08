@@ -21,7 +21,6 @@ CREATE TABLE ARTIST  ( id_no double,
                        Country_of_origin char(50),
                        Epoch char(50),
                        Main_style char(50),
-					   PRIMARY KEY (Name),
 					   FOREIGN KEY (id_no) REFERENCES ART_OBJECT (id_no)
 					   );
                        
@@ -162,7 +161,7 @@ INSERT INTO ART_OBJECT (id_no, Origin, Title, Epoch, Description, Year)
 
 INSERT INTO ARTIST (id_no, Name, Description, Date_born, Date_died, Country_of_origin, Epoch, Main_style)
  VALUES (1, 'Leonardo Da Vinci', 'Mona Lisa',1452,1519,'Italy','Renaissance','Renaissance'),
-		(2,'Leonardo Da Vinci', 'The Last Supper', 1452, 1519, 'Italy', 'Renaissance', 'Renaissance'),
+ 		(2,'Leonardo Da Vinci', 'The Last Supper', 1452, 1519, 'Italy', 'Renaissance', 'Renaissance'),
 		(3,'Vincent Van Gogh','The Starry Night',1853,1890, 'Netherlands','Modern', 'Post-Impressionism'),
 		(4, 'Edvard Munch', 'Ecstasy of Saint Teresa', 1863, 1944, 'Norway', 'Modern', 'Post-Impressionism'),
 		(5, 'Maqbool Fida Hussain', 'Horses', '1915', '2011', 'India', 'Modern', 'Cubism'),
