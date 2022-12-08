@@ -138,7 +138,7 @@ FLUSH PRIVILEGES;
 USE MUSEUM;
 
 INSERT INTO ART_OBJECT (id_no, Origin, Title, Epoch, Description, Year)
- VALUES (1, 'Italian', 'Mona Lisa', 'Renaissance', 'Florentine Merchants wife', 1503),
+ VALUES (1, 'Italian', 'Mona Lisa', 'Renaissance', 'Florentine Wife', 1503),
 		(2, 'Italian', 'The Last Supper', 'Renaissance', 'Jesus eats', 1496),
 		(3, 'French', 'The Starry Night', 'Modern', 'Dream', 1889),
 		(4, 'Norweigan', 'The Scream', 'Modern', 'paniced creature', 1893),
