@@ -197,7 +197,7 @@ def data_entry_console(cur, cnx):
 
     if selection == '1':
         print("\nWelcome to the lookup console:")
-        lookup(cur, cnx)
+        lookup(cur, cnx, 'data_entry')
     if selection == '2':
         add(cur, cnx)
     if selection == '3':
@@ -208,7 +208,7 @@ def data_entry_console(cur, cnx):
         print("Invalid selection, please try again")
         data_entry_console(cur, cnx)
 
-def lookup(cur, cnx):
+def lookup(cur, cnx, usr):
     # This function allows the user to lookup information in the database not using exact sql commands
     print("1 - Lookup Artist")
     print("2 - Lookup Art object")
@@ -219,7 +219,7 @@ def lookup(cur, cnx):
     print("7 - Lookup Collection")
     print("8 - Lookup Exhibitions")
     print("9 - Lookup On Display")
-    print("10 - Go Back")
+    print("10 - Go Back/Quit as Guest")
 
     selection = input("Please Select 1, 2, 3, 4, 5, 6, 7, 8, 9, 10: ")
 
@@ -258,11 +258,16 @@ def lookup(cur, cnx):
         on_display_name = float(input("Please enter the id_no of the art object to check if it is on display or not: "))
         specific_lookup(cur, cnx, 'on_display', on_display_name)
     elif selection == '10':
-        data_entry_console(cur, cnx)
+        if usr == 'data_entry':
+            data_entry_console(cur, cnx)
+        if usr == 'guest':
+            guest_view(cur, cnx)
     else:
         print("Invalid selection, please try again")
-        print("\nWelcome to the lookup console:")
-        lookup(cur, cnx)
+    print("\nWelcome to the lookup console:")
+    lookup(cur, cnx, usr)
+
+    
 
 def add(cur, cnx):
     # This function allows the user to add information to the database not using exact sql commands
@@ -422,7 +427,8 @@ def specific_lookup(cur, cnx, lookup, identifier):
 
 def guest_view():
     print("\nWelcome to the Guest Console")
-    lookup(cur, cnx)
+    lookup(cur, cnx, 'guest')
+    exit()
 
 if __name__ == "__main__":
     
