@@ -230,28 +230,32 @@ def lookup(cur, cnx):
         cur.execute(sql, (artist_name,))
         format(cur, cnx)
     elif selection == '2':
-        art_object_name = input("Please enter the id_no of the art object: ")
-        specific_lookup(cur, cnx, 'art_object', art_object_name)
+        art_object_name = float(input("Please enter the id_no of the art object: "))
+        sql = "SELECT * FROM art_object WHERE id_no = %s"
+        cur.execute(sql, (art_object_name,))
+        format(cur, cnx)
     elif selection == '3':
-        painting_name = input("Please enter the id_no of the painting: ")
-        specific_lookup(cur, cnx, 'painting', painting_name)
+        painting_name = float(input("Please enter the id_no of the painting: "))
+        sql = "SELECT * FROM painting WHERE id_no = %s"
+        cur.execute(sql, (painting_name,))
+        format(cur, cnx)
     elif selection == '4':
-        sculpture_name = input("Please enter the id_no of the sculpture: ")
+        sculpture_name = float(input("Please enter the id_no of the sculpture: "))
         specific_lookup(cur, cnx, 'sculpture', sculpture_name)
     elif selection == '5':
-        statue_name = input("Please enter the id_no of the statue: ")
+        statue_name = float(input("Please enter the id_no of the statue: "))
         specific_lookup(cur, cnx, 'statue', statue_name)
     elif selection == '6':
-        other_name = input("Please enter the id_no of the other: ")
+        other_name = float(input("Please enter the id_no of the other: "))
         specific_lookup(cur, cnx, 'other', other_name)
     elif selection == '7':
-        collection_name = input("Please enter the Name of the collection: ")
+        collection_name = float(input("Please enter the Name of the collection: "))
         specific_lookup(cur, cnx, 'collection', collection_name)
     elif selection == '8':
-        exhibition_name = input("Please enter the Name of the exhibition: ")
+        exhibition_name = float(input("Please enter the Name of the exhibition: "))
         specific_lookup(cur, cnx, 'exhibition', exhibition_name)
     elif selection == '9':
-        on_display_name = input("Please enter the id_no of the art object to check if it is on display or not: ")
+        on_display_name = float(input("Please enter the id_no of the art object to check if it is on display or not: "))
         specific_lookup(cur, cnx, 'on_display', on_display_name)
     elif selection == '10':
         data_entry_console(cur, cnx)
@@ -411,8 +415,9 @@ def add_art_object_from_file(cur, cnx):
     
     
 def specific_lookup(cur, cnx, lookup, identifier):
-    sql = "SELECT * FROM %s WHERE id_no = %s"
-    cur.execute(sql, (lookup, identifier,))
+    id = int(identifier)
+    sql = "SELECT * FROM art_object WHERE id_no = %s"
+    cur.execute(sql, (id,))
     format(cur, cnx)
 
 def guest_view():
