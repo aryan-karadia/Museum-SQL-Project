@@ -51,15 +51,6 @@ def admin_console(cur, cnx):
         print("Invalid selection, please try again")
         admin_console(cur, cnx)
 
-def data_manipulate(cur, cnx):
-    # This function allows the user to manipulate the database through the command line using exact sql commands
-    command = input("Please enter the command you want to execute, enter q to quit: ")
-    while (command != 'q'):
-        cur.execute(command)
-        cnx.commit()
-        print("\nCommand executed successfully!\n")
-        command = input("Please enter the command you want to execute, enter q to quit: ")
-    
 def add_user(cur, cnx):
     print("\nWelcome to the Add User console:")
     print("1 - Add New Admin")
@@ -75,8 +66,6 @@ def add_user(cur, cnx):
     
     if sub_selection == '2':
         add_data_entry(cur, cnx)
-
-    pass
 
 def add_admin(cur, cnx):
     print("\nWelcome to the Add Admin console:")
@@ -98,7 +87,6 @@ def add_admin(cur, cnx):
     cnx.commit()
     print("\nAdmin added successfully!\n")
     admin_console(cur, cnx)
-    pass
 
 def add_data_entry(cur, cnx):
     print("\nWelcome to the Add Data Entry console:")
@@ -118,7 +106,6 @@ def add_data_entry(cur, cnx):
     cnx.commit()
     print("\nData Entry User added successfully!\n")
     admin_console(cur, cnx)
-    pass
 
 def manage_users(cur, cnx):
     print("\nWelcome to the Manage Users console:")
@@ -177,6 +164,15 @@ def manage_users(cur, cnx):
         print("\nUser unblocked successfully!\n")
         admin_console(cur, cnx)
 
+def data_manipulate(cur, cnx):
+    # This function allows the user to manipulate the database through the command line using exact sql commands
+    command = input("Please enter the command you want to execute, enter q to quit: ")
+    while (command != 'q'):
+        cur.execute(command)
+        cnx.commit()
+        print("\nCommand executed successfully!\n")
+        command = input("Please enter the command you want to execute, enter q to quit: ")
+    
 def data_view(cur, cnx):
     # This function allows the user to view the database through the command line using exact sql commands
     command = input("Please enter the command you want to execute, enter q to quit: ")
@@ -185,6 +181,21 @@ def data_view(cur, cnx):
         cur.execute(command)
         format(cur, cnx)
         command = input("Please enter the command you want to execute, enter q to quit: ")
+
+def add_art_object_from_file(cur, cnx):
+    filename = input("Please enter the name of the file you would like to add: ")
+    fd = open(filename, 'r')
+    sqlFile = fd.read()
+    fd.close()
+    sqlCommands = sqlFile.split(';')
+    for command in sqlCommands:
+        try:
+            if command.strip() != '':
+                cur.execute(command)
+        except IOError as msg:
+            print("Command skipped: ", msg)
+    print("Database updated successfully!")
+
 
 def data_entry_console(cur, cnx):
     print("\nWelcome to the Data Entry console:")
@@ -268,9 +279,13 @@ def lookup(cur, cnx, usr):
     else:
         print("Invalid selection, please try again")
     print("\nWelcome to the lookup console:")
-    lookup(cur, cnx, usr)
+    lookup(cur, cnx, usr)  
 
-    
+def specific_lookup(cur, cnx, lookup, identifier):
+    id = int(identifier)
+    sql = "SELECT * FROM %s WHERE id_no = %s"
+    cur.execute(sql, (lookup, id,))
+    format(cur, cnx)
 
 def add(cur, cnx):
     # This function allows the user to add information to the database not using exact sql commands
@@ -415,6 +430,11 @@ def edit(cur, cnx):
             update(cur, cnx, type, old_value_list[i], new_value_list[i], identifier)
         print("Database updated successfully!")
 
+def update(cur, cnx, table, old_value, new_value, identifier):
+    sql = "UPDATE %s SET %s = %s WHERE id_no = %s"
+    cur.execute(sql, (table, old_value, new_value, identifier,))
+    cnx.commit()
+
 def delete(cur, cnx):
     print("\nWhat would you like to delete: ")
     print("1- Art Object")
@@ -498,32 +518,6 @@ def delete(cur, cnx):
     else:
         print("Please enter a valid input.")
         delete(cur, cnx)
-    
-def update(cur, cnx, table, old_value, new_value, identifier):
-    sql = "UPDATE %s SET %s = %s WHERE id_no = %s"
-    cur.execute(sql, (table, old_value, new_value, identifier,))
-    cnx.commit()
-
-def add_art_object_from_file(cur, cnx):
-    filename = input("Please enter the name of the file you would like to add: ")
-    fd = open(filename, 'r')
-    sqlFile = fd.read()
-    fd.close()
-    sqlCommands = sqlFile.split(';')
-    for command in sqlCommands:
-        try:
-            if command.strip() != '':
-                cur.execute(command)
-        except IOError as msg:
-            print("Command skipped: ", msg)
-    print("Database updated successfully!")
-    
-    
-def specific_lookup(cur, cnx, lookup, identifier):
-    id = int(identifier)
-    sql = "SELECT * FROM art_object WHERE id_no = %s"
-    cur.execute(sql, (id,))
-    format(cur, cnx)
 
 def guest_view():
     print("\nWelcome to the Guest Console")
