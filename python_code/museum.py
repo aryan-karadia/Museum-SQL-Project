@@ -196,7 +196,6 @@ def add_art_object_from_file(cur, cnx):
             print("Command skipped: ", msg)
     print("Database updated successfully!")
 
-
 def data_entry_console(cur, cnx):
     print("\nWelcome to the Data Entry console:")
     print("1 - Lookup Information")

@@ -41,10 +41,15 @@ To open the museumEER.drawio file, you will need to download the VSCode Draw.io 
 **VSCode Draw.io Extension**
 
 Name: Draw.io Integration
+
 Id: hediet.vscode-drawio
+
 Description: This unofficial extension integrates Draw.io into VS Code.
+
 Version: 1.6.4
+
 Publisher: Henning Dieterichs
+
 VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio
 
 ## Future Improvements
