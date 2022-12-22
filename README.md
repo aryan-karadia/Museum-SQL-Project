@@ -18,6 +18,10 @@ The objective of this project is to design and implement a real-world database a
 
 I designed the enhanced-entity-relation diagram along with a short description of the design and any assumptions I had made. From the EER diagram, I mapped the relational model into a relational schema. Furthermore, I along with a fellow group member, created and implemented the python application of the project. This includes creating multiple functions and using pair programming to create the other functions. This also includes debugging the python application and checking every function for functionality.
 
+### Challenges
+
+What I found the most challenging to be was to implement the access control in MySQL using python. Having to send MySQL commands in a python application from user inputs was particularly challenging as the user needed permissions they did not have. This was solved through extensive debugging and research, and the solution was to give the admin user specific grant permissions to the database.
+
 
 ## Notes
 To initially start this application, you have two credentials:
