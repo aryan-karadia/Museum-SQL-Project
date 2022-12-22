@@ -2,6 +2,7 @@
 ### THIS PROJECT IS NOT COMPLETE AND CAN STILL BE FURTHER IMPROVED UPON. THIS IS A WORK IN PROGRESS.
 
 **Group Members**
+
 Aryan Karadia
 
 Aditya Prasad
@@ -34,6 +35,17 @@ or
 ### Password: 12345
 
 Signing in as guest requires no username or password inputs.
+
+To open the museumEER.drawio file, you will need to download the VSCode Draw.io extension. This file is the enhanced entity relationship diagram of the database.
+
+**VSCode Draw.io Extension**
+
+Name: Draw.io Integration
+Id: hediet.vscode-drawio
+Description: This unofficial extension integrates Draw.io into VS Code.
+Version: 1.6.4
+Publisher: Henning Dieterichs
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio
 
 ## Future Improvements
 * Add a website or GUI to the application
