@@ -1,43 +1,23 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=9441671&assignment_repo_type=AssignmentRepo)
-# Museum-Project
+# Museum-SQL-Project
+### THIS PROJECT IS NOT COMPLETE AND CAN STILL BE FURTHER IMPROVED UPON. THIS IS A WORK IN PROGRESS.
 
-**Group 25, The Boys**
-Aryan Karadia, 30140288, aryan.karadia@ucalgary.ca 
+**Group Members**
+Aryan Karadia
 
-Aditya Prasad, 30148859, aditya.prasad@ucalgary.ca 
+Aditya Prasad
 
-Rohil Singh Dhillon, 30139470, rohil.dhillon@ucalgary.ca 
+Rohil Singh Dhillon
 
-Akshpreet Singh, 30129354, akshpreet.singh@ucalgary.ca 
+Akshpreet Singh
 
-## Task Distribution
+## Project Description
 
-### Aryan
-Designing the EER diagram along with a short description of the design and any assumptions made. Also mapping the EER Diagram into a relational schema. Assisted in creating and implementing the python application of the project. This includes creating multiple functions and pair programming to create the other functions. This also includes debugging the python application and checking every function for functionality.
+The objective of this project is to design and implement a real-world database application using database design and SQL queries. This application allows for a museum to manage their art objects and events, as well as user access and management. The application addressed three main areas: managing art objects, managing users, and providing access control. The database design considered the requirements and functionality of different types of users, including admins, data entry users, and end users. Admins had the ability to add and edit users, block users, and make changes to the database, while data entry users were able to add and modify information in the database within the constraints of the database. End users were able to look up information in the database. All users needed to log in to the application. The application was implemented using Python and SQL. 
 
-### Aditya
-Creating and implementing the python application part of the project. Debugging the python application and testing possible input paths to make sure functions work.
+## My Contribution
 
-### Rohil:
-Queries: 
-1.) Show all tables and explain how they are related to one another 
-2.) A retrival query using joined tables
-3.) An update operation with any necessary triggers
-4.) A deletion operation with any necessary triggers
+I designed the enhanced-entity-relation diagram along with a short description of the design and any assumptions I had made. From the EER diagram, I mapped the relational model into a relational schema. Furthermore, I along with a fellow group member, created and implemented the python application of the project. This includes creating multiple functions and using pair programming to create the other functions. This also includes debugging the python application and checking every function for functionality.
 
-Data Collection on Paintings, Sculptures, Statues, and Others. 5 each for each category. Data collection on artists, exhibitions, and collections.
-
-Queries for populating the database.
-
-### Akshpreet:
-Created and populated the database. Wrote the following Queries with Rohil:
-1) Show all tables and explain how they are related to one another (keys, triggers, etc.)
-2) A basic retrieval query
-3) A retrieval query with ordered results
-4) A nested retrieval query
-5) A retrieval query using joined tables
-6) An update operation with any necessary triggers
-7) A deletion operation with any necessary triggers
 
 ## Notes
 To initially start this application, you have two credentials:
@@ -50,3 +30,9 @@ or
 ### Password: 12345
 
 Signing in as guest requires no username or password inputs.
+
+## Future Improvements
+* Add a website or GUI to the application
+* Add more tables to the database
+* Add more data to the database
+
